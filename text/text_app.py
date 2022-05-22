@@ -1,6 +1,5 @@
-#!
-
 import time
+import threading
 
 import pyrr
 import numpy as np
@@ -26,21 +25,30 @@ class DisplayPort:
         self.offset = 0
         self.click = False
 
-        self.coins_button_buffer = """AUDCAD\nAUDCHF\nAUDJPY\nAUDUSD\nCADCHF\nCADJPY\nCHFJPY\nEURAUD\nEURCAD\nEURCHF\nEURGBP\nEURJPY\nEURUSD\nGBPAUD\nGBPCAD\nGBPCHF\nGBPJPY\nGBPUSD\nUSDCAD\nUSDCHF\nUSDJPY\n"""
+        self.coin_pairs = ["AUDCAD", "AUDCHF", "AUDJPY", "AUDUSD", "CADCHF", "CADJPY", "CHFJPY", "EURAUD", "EURCAD", "EURCHF", "EURGBP", "EURJPY", "EURUSD", "GBPAUD", "GBPCAD", "GBPCHF", "GBPJPY", "GBPUSD", "USDCAD", "USDCHF", "USDJPY"]
+        self.coins_button_buffer = """AUDCAD\nAUDCHF\nAUDJPY\nAUDUSD\nCADCHF\nCADJPY\nCHFJPY\nEURAUD\nEURCAD\nEURCHF\nEURGBP\nEURJPY\nEURUSD\nGBPAUD\nGBPCAD\nGBPCHF\nGBPJPY\nGBPUSD\nUSDCAD\nUSDCHF\nUSDJPY\n """
         self.available_interval = ["30s", " 1m", " 3m", " 5m", "15m", "30m", " 1h", " 4h"]
 
-    def __call__(self, *args, **kwargs):
+        from data_manager import DataManager
+        self.data_manager = DataManager(
+            time_from=(2022, 5, 13),
+            time_to=(2022, 5, 16),
+            login=25115284,
+            server="MetaQuotes-Demo",
+            password="4zatlbqx"
+        )
 
+
+    def __call__(self, *args, **kwargs):
         glfw.make_context_current(self.window)
         glEnable(GL_BLEND)
         glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA)
         renderer = TextRenderer(1920, 1080)
-        self.chart = Chart("AUDUSD")
+        self.chart = Chart(self.data_manager, "AUDUSD")
         self.track_cursor()
         self.score_period_4 = """"""
         self.score_period_8 = """"""
         self.score_period_12 = """"""
-
 
         if console:
 

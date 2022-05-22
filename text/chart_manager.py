@@ -6,9 +6,8 @@ from OpenGL.GL.shaders import compileProgram, compileShader
 
 
 class Chart:
-    def __init__(self, coin_pair="EURUSD", time_interval="15m"):
-        from data_manager import DataManager
-        self.dm = DataManager(time_from=(2022, 5, 13), time_to=(2022, 5, 17))
+    def __init__(self, data_manger, coin_pair="EURUSD", time_interval="15m"):
+        self.dm = data_manger
         self.dm(time_interval)
 
         self.coin_pair = coin_pair
