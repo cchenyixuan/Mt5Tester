@@ -27,12 +27,12 @@ class DisplayPort:
 
         self.coin_pairs = ["AUDCAD", "AUDCHF", "AUDJPY", "AUDUSD", "CADCHF", "CADJPY", "CHFJPY", "EURAUD", "EURCAD", "EURCHF", "EURGBP", "EURJPY", "EURUSD", "GBPAUD", "GBPCAD", "GBPCHF", "GBPJPY", "GBPUSD", "USDCAD", "USDCHF", "USDJPY"]
         self.coins_button_buffer = """AUDCAD\nAUDCHF\nAUDJPY\nAUDUSD\nCADCHF\nCADJPY\nCHFJPY\nEURAUD\nEURCAD\nEURCHF\nEURGBP\nEURJPY\nEURUSD\nGBPAUD\nGBPCAD\nGBPCHF\nGBPJPY\nGBPUSD\nUSDCAD\nUSDCHF\nUSDJPY\n """
-        self.available_interval = ["30s", " 1m", " 3m", " 5m", "15m", "30m", " 1h", " 4h"]
+        self.available_interval = ["30s", "1m", " 3m", " 5m", "15m", "30m", " 1h", " 4h"]
 
         from data_manager import DataManager
         self.data_manager = DataManager(
-            time_from=(2022, 5, 13),
-            time_to=(2022, 5, 16),
+            time_from=(2022, 5, 18),
+            time_to=(2022, 5, 21),
             login=25115284,
             server="MetaQuotes-Demo",
             password="4zatlbqx"
@@ -112,13 +112,14 @@ class DisplayPort:
             glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
 
             self.chart(self.cursor_position, self.offset)
+            self.chart.redraw(self.chart.coin_pair)  # TODO: bad idea! use glBufferSubData instead.
             if console:
                 renderer.render_with_encoding(console_buffer, -900, -400, 0.3, (np.sin(glfw.get_time()), 0.7, 0.2))
 
-            renderer.render_with_encoding(time.ctime(time.time())+f"\n{self.cursor_position[0]}, {self.cursor_position[1]}\n{self.offset}\n{min([(self.cursor_position[0]+5)//10+self.offset, 160+self.offset])}\n04: {self.score_period_4}\n08: {self.score_period_8}\n12: {self.score_period_12}\nOpen High Low Close: {str(self.chart.dm.candles[self.chart.coin_pair][int(min([(self.cursor_position[0]+5)//10+self.offset, 160+self.offset]))])}", 210, -200, 0.3, (np.sin(self.cursor_position[0]/100), 0.8, 0.9))
+            renderer.render_with_encoding(time.ctime(time.time())+f"\n{self.cursor_position[0]}, {self.cursor_position[1]}\n{self.offset}\n{min([(self.cursor_position[0]+5)//10+self.offset, 160+self.offset])}\n04: {self.score_period_4}\n08: {self.score_period_8}\n12: {self.score_period_12}\nOpen High Low Close: {str(self.chart.dm.candles[self.chart.time_interval][self.chart.coin_pair][int(min([(self.cursor_position[0]+5)//10+self.offset, 160+self.offset]))][:-1])}", 210, -200, 0.3, (np.sin(self.cursor_position[0]/100), 0.8, 0.9))
 
             for step, pair in enumerate(self.coins_button_buffer.split("\n")[:-1]):
-                text_to_render = f"{str(self.chart.dm.candles[pair][int(min([(self.cursor_position[0]+5)//10+self.offset, 160+self.offset]))])}\n"
+                text_to_render = f"{time.ctime(self.chart.dm.candles[self.chart.time_interval][pair][int(min([(self.cursor_position[0]+5)//10+self.offset, 160+self.offset]))][-1])}\n"
                 if self.chart.coin_pair == pair:
                     text_color = (0.9, 0.2, 0.4)
                 if self.cursor_position[0] > 1160 and 19+30*step <= self.cursor_position[1] < 49+30*step:
@@ -155,9 +156,9 @@ class DisplayPort:
             print(args[1:])
             delta = args[1] - self.cursor_position[0]
             self.cursor_position = args[1:]
-            self.score_period_4 = str(self.chart.dm.descend(int(min([(self.cursor_position[0]+5)//10+self.offset, 160+self.offset])), 4))
-            self.score_period_8 = str(self.chart.dm.descend(int(min([(self.cursor_position[0] + 5) // 10 + self.offset, 160 + self.offset])), 8))
-            self.score_period_12 = str(self.chart.dm.descend(int(min([(self.cursor_position[0] + 5) // 10 + self.offset, 160 + self.offset])), 12))
+            self.score_period_4 = str(self.chart.dm.descend(self.chart.time_interval, int(min([(self.cursor_position[0]+5)//10+self.offset, 160+self.offset])), 4))
+            self.score_period_8 = str(self.chart.dm.descend(self.chart.time_interval, int(min([(self.cursor_position[0] + 5) // 10 + self.offset, 160 + self.offset])), 8))
+            self.score_period_12 = str(self.chart.dm.descend(self.chart.time_interval, int(min([(self.cursor_position[0] + 5) // 10 + self.offset, 160 + self.offset])), 12))
             if self.click:
                 self.offset = int(min(max(0, self.offset-delta), self.chart.max_length))
                 print(self.offset)
