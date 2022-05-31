@@ -81,6 +81,7 @@ class DataClass:
 if __name__ == "__main__":
     dc = DataClass("USDJPY", (2022, 5, 20), (2022, 5, 21))
     """
+    
     for candle in data:  # data is fetched by mt5.copy_rates_range()
         print(candle)
         for step, timestamp in enumerate(dc.buffer):
