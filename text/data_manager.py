@@ -20,6 +20,8 @@ import MetaTrader5 as mt5
 print("MetaTrader5 package author: ", mt5.__author__)
 print("MetaTrader5 package version: ", mt5.__version__)
 
+from dataclass import DataClass
+
 
 class TimeSpawnOverSizeError(BaseException):
     """
@@ -35,6 +37,13 @@ class RequestOvertimeError(BaseException):
     pass
 
 
+class EmptyDataError(BaseException):
+    """
+    get empty data
+    """
+    pass
+
+
 # %%
 
 class DataManager:
@@ -42,53 +51,115 @@ class DataManager:
     Manager of mt5 data.
     """
 
-    def __init__(self, time_from=(2022, 5, 13), time_to=(2022, 5, 16), login=25115284, server="MetaQuotes-Demo",
+    def __init__(self, time_from=(2022, 5, 13), time_to=(2022, 6, 1), login=25115284, server="MetaQuotes-Demo",
                  password="4zatlbqx"):
         """
         init manager, connect mt5 server an get all ticks
         """
         self.pairs = {
-            "AUDCAD": None,
-            "AUDCHF": None,
-            "AUDJPY": None,
-            "AUDUSD": None,
-            "CADCHF": None,
-            "CADJPY": None,
-            "CHFJPY": None,
-            "EURAUD": None,
-            "EURCAD": None,
-            "EURCHF": None,
-            "EURGBP": None,
-            "EURJPY": None,
-            "EURUSD": None,
-            "GBPAUD": None,
-            "GBPCAD": None,
-            "GBPCHF": None,
-            "GBPJPY": None,
-            "GBPUSD": None,
-            "USDCAD": None,
-            "USDCHF": None,
-            "USDJPY": None,
+            "AUDCAD": DataClass("AUDCAD", time_from, time_to),
+            "AUDCHF": DataClass("AUDCHF", time_from, time_to),
+            "AUDJPY": DataClass("AUDJPY", time_from, time_to),
+            "AUDUSD": DataClass("AUDUSD", time_from, time_to),
+            "CADCHF": DataClass("CADCHF", time_from, time_to),
+            "CADJPY": DataClass("CADJPY", time_from, time_to),
+            "CHFJPY": DataClass("CHFJPY", time_from, time_to),
+            "EURAUD": DataClass("EURAUD", time_from, time_to),
+            "EURCAD": DataClass("EURCAD", time_from, time_to),
+            "EURCHF": DataClass("EURCHF", time_from, time_to),
+            "EURGBP": DataClass("EURGBP", time_from, time_to),
+            "EURJPY": DataClass("EURJPY", time_from, time_to),
+            "EURUSD": DataClass("EURUSD", time_from, time_to),
+            "GBPAUD": DataClass("GBPAUD", time_from, time_to),
+            "GBPCAD": DataClass("GBPCAD", time_from, time_to),
+            "GBPCHF": DataClass("GBPCHF", time_from, time_to),
+            "GBPJPY": DataClass("GBPJPY", time_from, time_to),
+            "GBPUSD": DataClass("GBPUSD", time_from, time_to),
+            "USDCAD": DataClass("USDCAD", time_from, time_to),
+            "USDCHF": DataClass("USDCHF", time_from, time_to),
+            "USDJPY": DataClass("USDJPY", time_from, time_to),
         }
         self.candles = {}
         self.time_interval = "1m"
 
+        self.time_from = time_from
+        self.time_to = time_to
 
         self.login = login
         self.server = server
         self.password = password
 
-        self.mt5_load_ticks(time_from, time_to)
+        self.mt5_load_rates(time_from, time_to)
 
-        self.time_from = (self.pairs['AUDCAD'].iloc[0, 5]/1000) - (self.pairs['AUDCAD'].iloc[0, 5]/1000) % (60*60*24)
+        # self.time_from = (self.pairs['AUDCAD'].iloc[0, 5] / 1000) - (self.pairs['AUDCAD'].iloc[0, 5] / 1000) % (
+        #             60 * 60 * 24)
         auto_upgrade = threading.Thread(target=self.c_call)
         auto_upgrade.setDaemon(True)
         auto_upgrade.start()
 
+    def mt5_load_rates(self, time_from, time_to):
+        # establish connection to MetaTrader 5 terminal
+        if mt5.initialize(login=self.login, server=self.server, password=self.password):
+            self.load_rates(time_from=time_from, time_to=time_to)
+            # shut down connection to the MetaTrader 5 terminal
+            mt5.shutdown()
+        else:
+            print("initialize() failed, error code =", mt5.last_error())
+
+    def load_rates(self, time_from, time_to, time_zone="Etc/UTC"):
+        """
+            load raw ticks from cache or server
+
+            :param time_from: tuple of (yyyy, mm, dd)
+            :param time_to: tuple of (yyyy, mm, dd)
+            :param time_zone: "Etc/UTC"
+            :return: dict of all coin-pair with value filled
+            """
+        # set time zone to UTC
+        timezone = pytz.timezone(time_zone)
+        # create 'datetime' object in UTC time zone to avoid the implementation of a local time zone offset
+        utc_from = datetime(*time_from, tzinfo=timezone)
+        utc_to = datetime(*time_to, tzinfo=timezone)
+
+        for pair in self.pairs.keys():
+            while True:
+                try:
+                    # fetch data
+                    data = mt5.copy_rates_range(pair, mt5.TIMEFRAME_M1, utc_from, utc_to)
+                    # verify data
+                    if mt5.last_error()[0] == -3:  # (-3, 'Terminal: Out of memory')  TimeSpawn Oversize
+                        raise TimeSpawnOverSizeError
+                    if mt5.last_error()[0] == -1:  # Request Overtime
+                        raise RequestOvertimeError
+                    if len(data) == 0:  # EmptyData! ReloadIsRequired.
+                        raise EmptyDataError
+                    break
+                except TimeSpawnOverSizeError:
+                    print(f"{pair} failed!")
+                    print("Time-spawn is too long, unable to continue.")
+                    raise TimeSpawnOverSizeError
+                except RequestOvertimeError:
+                    print(f"{pair} failed!")
+                    print("Retrying...")
+                except EmptyDataError:
+                    print(f"{pair} failed!")
+                    print("Empty data received, retrying...")
+
+            print(f"Coin-pair: {pair} Rates received: {len(data)}")
+            # upgrade buffer
+            self.pairs[pair].upgrade(data)
+        # check dataclass if all same timestamp
+        begin = [self.pairs[pair].utc_from_timestamp for pair in self.pairs.keys()]
+        end = [self.pairs[pair].utc_to_timestamp for pair in self.pairs.keys()]
+        if max(begin) - min(begin) < 0.01 and max(end) - min(end) < 0.01:
+            pass
+        else:
+            print("Unmatched TimeStamps!")
+
     def c_call(self):
         while True:
-            time.sleep(60)
-            self.__call__("1m")
+            time.sleep(1)
+            self.__call__()
 
     def mt5_load_ticks(self, time_from, time_to):
         # establish connection to MetaTrader 5 terminal
@@ -99,9 +170,36 @@ class DataManager:
         else:
             print("initialize() failed, error code =", mt5.last_error())
 
-    def __call__(self, time_interval="15min"):
-        self.time_interval = time_interval
-        self.load_candles(time_interval)
+    def __call__(self):
+        tomorrow = datetime.utcfromtimestamp(time.time()+86400.0)
+        today = datetime.utcfromtimestamp(time.time())
+        self.time_to = (tomorrow.year, tomorrow.month, tomorrow.day)
+        print((today.year, today.month, today.day), self.time_to)  # debug
+        self.mt5_load_rates((today.year, today.month, today.day), self.time_to)
+
+    def descend(self, interval="1min", start=4, period=4) -> list:
+        """  TODO: repair this using new dataclass
+        Weak Currency ... Strong Currency
+
+        :param interval: candle size, default is 1min.
+        :param start: index of the candle array, default is 4.
+        :param period: offsets from start, default is 4.
+        :return: sorted currency with increasing strength.
+        """
+        if start - period < 0:
+            period = start
+            print("Insufficient data-length, LowAccuracyWarning!")
+        currency = {"USD": 0, "AUD": 0, "JPY": 0, "CHF": 0, "GBP": 0, "EUR": 0, "CAD": 0}
+        for pair in self.pairs.keys():
+            if self.candles[interval][pair][start][3] - self.candles[interval][pair][start - period][
+                3] > 0:  # compare "close"
+                currency[pair[:3]] += 1
+            elif self.candles[interval][pair][start][3] - self.candles[interval][pair][start - period][3] < 0:
+                currency[pair[3:]] += 1
+            else:
+                pass
+
+        return sorted(zip(currency.values(), currency.keys()))
 
     def load_ticks(self, time_from=(2020, 1, 1), time_to=(2020, 1, 7), time_zone="Etc/UTC") -> dict:
         """
@@ -272,8 +370,11 @@ class DataManager:
             """
             upgrade ticks -> index ticks start -> create candles -> concat -> cut tail
             """
-            time_to = [int(_) for _ in datetime.utcfromtimestamp(time.time()+24*60*60).strftime("%Y/%m/%d").split("/")]
-            time_from = [int(_) for _ in datetime.utcfromtimestamp(self.pairs["AUDCAD"].iloc[-1, 5]/1000).strftime("%Y/%m/%d").split("/")]
+            time_to = [int(_) for _ in
+                       datetime.utcfromtimestamp(time.time() + 24 * 60 * 60).strftime("%Y/%m/%d").split("/")]
+            time_from = [int(_) for _ in
+                         datetime.utcfromtimestamp(self.pairs["AUDCAD"].iloc[-1, 5] / 1000).strftime("%Y/%m/%d").split(
+                             "/")]
             self.mt5_load_ticks(time_from, time_to)  # upgrade ticks
 
             data = pool.starmap(self.generate_candles, arguments)
@@ -285,7 +386,9 @@ class DataManager:
                         _position_of_0 = 0
                         while temp[_position_of_0][0]:
                             _position_of_0 += 1
-                        self.candles[interval][item[0]] = temp[max(_position_of_0, item[1].shape[0])-item[1].shape[0]: max(_position_of_0, item[1].shape[0])]
+                        self.candles[interval][item[0]] = temp[
+                                                          max(_position_of_0, item[1].shape[0]) - item[1].shape[0]: max(
+                                                              _position_of_0, item[1].shape[0])]
                         break
                     elif step >= self.candles[interval][item[0]].shape[0]:
                         self.candles[interval][item[0]] = item[1]
@@ -301,30 +404,6 @@ class DataManager:
             self.candles[interval] = {}
             for item in data:  # item[0] == CoinPairs, item[1] == CandleBuffer
                 self.candles[interval][item[0]] = item[1]
-
-    def descend(self, interval="15min", start=4, period=4) -> list:
-        """
-        Weak Currency ... Strong Currency
-
-        :param interval: candle size, default is 15min.
-        :param start: index of the candle array, default is 4.
-        :param period: offsets from start, default is 4.
-        :return: sorted currency with increasing strength.
-        """
-        if start - period < 0:
-            period = start
-            print("Insufficient data-length, LowAccuracyWarning!")
-        currency = {"USD": 0, "AUD": 0, "JPY": 0, "CHF": 0, "GBP": 0, "EUR": 0, "CAD": 0}
-        for pair in self.pairs.keys():
-            if self.candles[interval][pair][start][3] - self.candles[interval][pair][start - period][
-                3] > 0:  # compare "close"
-                currency[pair[:3]] += 1
-            elif self.candles[interval][pair][start][3] - self.candles[interval][pair][start - period][3] < 0:
-                currency[pair[3:]] += 1
-            else:
-                pass
-
-        return sorted(zip(currency.values(), currency.keys()))
 
     def upgrade(self, period="7d", upgrade_interval="30s"):
         interval = 0
@@ -380,8 +459,8 @@ class DataManager:
 if __name__ == "__main__":
     try:
         manager = DataManager()
-        manager()
-        print(manager.candles[manager.time_interval].values())
-        print(manager.descend("15min", 10, 7))
+        # manager()
+        # print(manager.candles[manager.time_interval].values())
+        # print(manager.descend("15min", 10, 7))
     except:
         traceback.print_exc()

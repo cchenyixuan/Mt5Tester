@@ -11,12 +11,22 @@ class DataClass:
         self.utc_from_timestamp = datetime(*utc_from, tzinfo=self.time_zone).timestamp()
         self.utc_to = datetime(*utc_to, tzinfo=self.time_zone)
         self.utc_to_timestamp = datetime(*utc_to, tzinfo=self.time_zone).timestamp()
-        self.max_number = int(self.utc_to_timestamp-self.utc_from_timestamp)//60
+        self.max_number = int(self.utc_to_timestamp - self.utc_from_timestamp) // 60
 
         # x = datetime(2022, 5, 20, tzinfo=pytz.timezone("Etc/UTC"))
         self.buffer = np.zeros((self.max_number, 5), dtype=np.float64)
         for i in range(self.buffer.shape[0]):
             self.buffer[i, 0] += self.utc_from_timestamp + 60 * i
+
+        self.candles = {}
+        self.time_intervals = [1, 2, 3, 4, 5, 10, 15, 30, 45, 60, 120, 180, 240, 360, 720, 1440]
+        for time_interval in self.time_intervals:
+            if time_interval == 1:
+                self.candles[time_interval] = self.buffer
+            else:
+                self.candles[time_interval] = np.zeros((self.max_number//time_interval, 5), dtype=np.float64)
+                for i in range(self.candles[time_interval].shape[0]):
+                    self.candles[time_interval][i, 0] += self.utc_from_timestamp + 60 * time_interval * i
 
     def __iter__(self):
         self.index = 0
@@ -70,12 +80,19 @@ class DataClass:
             for step, timestamp in enumerate(self.buffer[pointer:]):
                 # if step != 0: print(step)  # debug
                 if abs(timestamp[0] - candle[0]) < 0.001:
-                    self.buffer[pointer+step][1] = np.array(candle[1], dtype=np.float32)
-                    self.buffer[pointer+step][2] = np.array(candle[2], dtype=np.float32)
-                    self.buffer[pointer+step][3] = np.array(candle[3], dtype=np.float32)
-                    self.buffer[pointer+step][4] = np.array(candle[4], dtype=np.float32)
+                    self.buffer[pointer + step][1] = np.array(candle[1], dtype=np.float32)
+                    self.buffer[pointer + step][2] = np.array(candle[2], dtype=np.float32)
+                    self.buffer[pointer + step][3] = np.array(candle[3], dtype=np.float32)
+                    self.buffer[pointer + step][4] = np.array(candle[4], dtype=np.float32)
                     break
-            pointer += (step+1)
+            pointer += (step + 1)
+        # buffer data upgraded, refresh candles
+        self.upgrade_candle()
+
+    def upgrade_candle(self):
+        for time_interval in self.time_intervals:
+            ...
+        pass
 
 
 if __name__ == "__main__":
