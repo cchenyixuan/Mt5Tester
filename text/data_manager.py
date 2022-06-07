@@ -51,10 +51,10 @@ class DataManager:
     Manager of mt5 data.
     """
 
-    def __init__(self, time_from=(2022, 5, 13), time_to=(2022, 6, 1), login=25115284, server="MetaQuotes-Demo",
+    def __init__(self, time_from=(2022, 6, 1), time_to=(2022, 6, 8), login=25115284, server="MetaQuotes-Demo",
                  password="4zatlbqx"):
         """
-        init manager, connect mt5 server an get all ticks
+        init manager, connect mt5 server and get all ticks
         """
         self.pairs = {
             "AUDCAD": DataClass("AUDCAD", time_from, time_to),
@@ -97,7 +97,7 @@ class DataManager:
         auto_upgrade.setDaemon(True)
         auto_upgrade.start()
 
-    def mt5_load_rates(self, time_from, time_to):
+    def mt5_load_rates(self, time_from: tuple, time_to: tuple) -> None:
         # establish connection to MetaTrader 5 terminal
         if mt5.initialize(login=self.login, server=self.server, password=self.password):
             self.load_rates(time_from=time_from, time_to=time_to)
@@ -106,7 +106,7 @@ class DataManager:
         else:
             print("initialize() failed, error code =", mt5.last_error())
 
-    def load_rates(self, time_from, time_to, time_zone="Etc/UTC"):
+    def load_rates(self, time_from: tuple, time_to: tuple, time_zone="Etc/UTC") -> None:
         """
             load raw ticks from cache or server
 
@@ -171,14 +171,14 @@ class DataManager:
             print("initialize() failed, error code =", mt5.last_error())
 
     def __call__(self):
-        tomorrow = datetime.utcfromtimestamp(time.time()+86400.0)
+        tomorrow = datetime.utcfromtimestamp(time.time() + 86400.0)
         today = datetime.utcfromtimestamp(time.time())
         self.time_to = (tomorrow.year, tomorrow.month, tomorrow.day)
         print((today.year, today.month, today.day), self.time_to)  # debug
         self.mt5_load_rates((today.year, today.month, today.day), self.time_to)
 
-    def descend(self, interval="1min", start=4, period=4) -> list:
-        """  TODO: repair this using new dataclass
+    def descend(self, interval=1, start=4, period=4) -> list:
+        """
         Weak Currency ... Strong Currency
 
         :param interval: candle size, default is 1min.
@@ -191,10 +191,10 @@ class DataManager:
             print("Insufficient data-length, LowAccuracyWarning!")
         currency = {"USD": 0, "AUD": 0, "JPY": 0, "CHF": 0, "GBP": 0, "EUR": 0, "CAD": 0}
         for pair in self.pairs.keys():
-            if self.candles[interval][pair][start][3] - self.candles[interval][pair][start - period][
-                3] > 0:  # compare "close"
+            # compare "close"
+            if self.pairs[pair].candles[interval][start, 4] - self.pairs[pair].candles[interval][start-period, 4] > 0:
                 currency[pair[:3]] += 1
-            elif self.candles[interval][pair][start][3] - self.candles[interval][pair][start - period][3] < 0:
+            elif self.pairs[pair].candles[interval][start, 4] - self.pairs[pair].candles[interval][start-period, 4] < 0:
                 currency[pair[3:]] += 1
             else:
                 pass
@@ -459,7 +459,11 @@ class DataManager:
 if __name__ == "__main__":
     try:
         manager = DataManager()
-        # manager()
+        manager()
+        print(manager.pairs["USDJPY"].candles[1])
+        # print(manager.pairs["USDJPY"].candles[5])
+        for _start in range(60, 300):
+            print(manager.descend(interval=1, start=_start, period=60))
         # print(manager.candles[manager.time_interval].values())
         # print(manager.descend("15min", 10, 7))
     except:

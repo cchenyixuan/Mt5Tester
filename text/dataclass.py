@@ -90,6 +90,7 @@ class DataClass:
         self.upgrade_candle()
 
     def upgrade_candle(self):
+        # Todo: find pointer to accelerate
         for time_interval in self.time_intervals:
             ...
         pass
