@@ -73,6 +73,8 @@ class DataClass:
                 break
             else:
                 pointer += 1
+        # upgrade begin ptr
+        ptr_start = pointer
 
         for candle in data:  # data is fetched by mt5.copy_rates_range()
             # print(candle)  # debug
@@ -80,17 +82,29 @@ class DataClass:
             for step, timestamp in enumerate(self.buffer[pointer:]):
                 # if step != 0: print(step)  # debug
                 if abs(timestamp[0] - candle[0]) < 0.001:
-                    self.buffer[pointer + step][1] = np.array(candle[1], dtype=np.float32)
-                    self.buffer[pointer + step][2] = np.array(candle[2], dtype=np.float32)
-                    self.buffer[pointer + step][3] = np.array(candle[3], dtype=np.float32)
-                    self.buffer[pointer + step][4] = np.array(candle[4], dtype=np.float32)
+                    self.buffer[pointer + step][1] = np.array(candle[1], dtype=np.float64)
+                    self.buffer[pointer + step][2] = np.array(candle[2], dtype=np.float64)
+                    self.buffer[pointer + step][3] = np.array(candle[3], dtype=np.float64)
+                    self.buffer[pointer + step][4] = np.array(candle[4], dtype=np.float64)
                     break
             pointer += (step + 1)
+        # upgrade end ptr
+        ptr_end = pointer
         # buffer data upgraded, refresh candles
-        self.upgrade_candle()
+        # print(ptr_start, ptr_end)  # debug
+        self.upgrade_candle(ptr_start, ptr_end)
 
-    def upgrade_candle(self):
+    def upgrade_candle(self, ptr1, ptr2):
         # Todo: find pointer to accelerate
+        # init empty candles of various size according to self.time_intervals
+        cache_candle = {interval: np.zeros([interval, 5], dtype=np.float64) for interval in self.time_intervals}
+
+        # access self.buffer[ptr1:ptr2] once and upgrade all intervals
+        for tick in self.buffer[ptr1: ptr2]:  # TODO: check here, ptr2 might buggy
+            # tick: timestamp, open, high, low, close
+            # tmp = len(slice)//time_interval
+            ...
+
         for time_interval in self.time_intervals:
             ...
         pass
