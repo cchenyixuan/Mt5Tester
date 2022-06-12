@@ -51,7 +51,7 @@ class DataManager:
     Manager of mt5 data.
     """
 
-    def __init__(self, time_from=(2022, 6, 1), time_to=(2022, 6, 8), login=25115284, server="MetaQuotes-Demo",
+    def __init__(self, time_from=(2022, 6, 1), time_to=(2022, 6, 10), login=25115284, server="MetaQuotes-Demo",
                  password="4zatlbqx"):
         """
         init manager, connect mt5 server and get all ticks
@@ -90,7 +90,7 @@ class DataManager:
         self.password = password
 
         self.mt5_load_rates(time_from, time_to)
-
+        # self.c_call()
         # self.time_from = (self.pairs['AUDCAD'].iloc[0, 5] / 1000) - (self.pairs['AUDCAD'].iloc[0, 5] / 1000) % (
         #             60 * 60 * 24)
         auto_upgrade = threading.Thread(target=self.c_call)
@@ -102,7 +102,7 @@ class DataManager:
         if mt5.initialize(login=self.login, server=self.server, password=self.password):
             self.load_rates(time_from=time_from, time_to=time_to)
             # shut down connection to the MetaTrader 5 terminal
-            mt5.shutdown()
+            # mt5.shutdown()  # TODO better solution
         else:
             print("initialize() failed, error code =", mt5.last_error())
 
@@ -131,7 +131,10 @@ class DataManager:
                         raise TimeSpawnOverSizeError
                     if mt5.last_error()[0] == -1:  # Request Overtime
                         raise RequestOvertimeError
-                    if len(data) == 0:  # EmptyData! ReloadIsRequired.
+                    if data is None or len(data) == 0:  # EmptyData! ReloadIsRequired.
+                        print(mt5.last_error())
+                        print(utc_from)
+                        print(utc_to)
                         raise EmptyDataError
                     break
                 except TimeSpawnOverSizeError:
@@ -144,6 +147,7 @@ class DataManager:
                 except EmptyDataError:
                     print(f"{pair} failed!")
                     print("Empty data received, retrying...")
+                    time.sleep(1)
 
             print(f"Coin-pair: {pair} Rates received: {len(data)}")
             # upgrade buffer
@@ -172,7 +176,7 @@ class DataManager:
 
     def __call__(self):
         tomorrow = datetime.utcfromtimestamp(time.time() + 86400.0)
-        today = datetime.utcfromtimestamp(time.time())
+        today = datetime.utcfromtimestamp(time.time()-86400.0*3)
         self.time_to = (tomorrow.year, tomorrow.month, tomorrow.day)
         print((today.year, today.month, today.day), self.time_to)  # debug
         self.mt5_load_rates((today.year, today.month, today.day), self.time_to)
@@ -457,14 +461,15 @@ class DataManager:
 
 
 if __name__ == "__main__":
-    try:
+    # try:
         manager = DataManager()
         manager()
         print(manager.pairs["USDJPY"].candles[1])
         # print(manager.pairs["USDJPY"].candles[5])
         for _start in range(60, 300):
-            print(manager.descend(interval=1, start=_start, period=60))
+            print(manager.descend(interval=5, start=_start, period=60))
+        input()
         # print(manager.candles[manager.time_interval].values())
         # print(manager.descend("15min", 10, 7))
-    except:
-        traceback.print_exc()
+    # except:
+    #     traceback.print_exc()

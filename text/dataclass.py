@@ -54,17 +54,21 @@ class DataClass:
         while data_begin < self.utc_from_timestamp:
             self.utc_from_timestamp -= 60 * 60 * 24
             self.utc_from = datetime.fromtimestamp(self.utc_from_timestamp, self.time_zone)
-            tmp = np.zeros((1440, 5), dtype=np.float64)
-            for i in range(tmp.shape[0]):
-                tmp[i, 0] += self.utc_from_timestamp + 60 * i
-            self.buffer = np.vstack((tmp, self.buffer))
+            for interval in self.time_intervals:
+                tmp = np.zeros((1440//interval, 5), dtype=np.float64)
+                for i in range(tmp.shape[0]):
+                    tmp[i, 0] += self.utc_from_timestamp + 60 * interval * i
+                self.candles[interval] = np.vstack((tmp, self.candles[interval]))
+            self.buffer = self.candles[1]
         while data_end > self.utc_to_timestamp:
             self.utc_to_timestamp += 60 * 60 * 24
             self.utc_to = datetime.fromtimestamp(self.utc_to_timestamp, self.time_zone)
-            tmp = np.zeros((1440, 5), dtype=np.float64)
-            for i in range(tmp.shape[0]):
-                tmp[-1 - i, 0] += self.utc_to_timestamp - 60 * i
-            self.buffer = np.vstack((self.buffer, tmp))
+            for interval in self.time_intervals:
+                tmp = np.zeros((1440//interval, 5), dtype=np.float64)
+                for i in range(tmp.shape[0]):
+                    tmp[-1 - i, 0] += self.utc_to_timestamp - 60 * interval * (i+1)  # this i+1 cost me 1.5 hours to fix
+                self.candles[interval] = np.vstack((self.candles[interval], tmp))
+            self.buffer = self.candles[1]
 
         # use a pointer for better performance, O(NlogN)->O(N)
         pointer = 0
@@ -87,27 +91,41 @@ class DataClass:
                     self.buffer[pointer + step][3] = np.array(candle[3], dtype=np.float64)
                     self.buffer[pointer + step][4] = np.array(candle[4], dtype=np.float64)
                     break
+                else:
+                    self.buffer[pointer + step][1:5] = self.buffer[pointer + step - 1][1:5]
             pointer += (step + 1)
         # upgrade end ptr
         ptr_end = pointer
         # buffer data upgraded, refresh candles
         # print(ptr_start, ptr_end)  # debug
+        self.max_number = int(self.utc_to_timestamp-self.utc_from_timestamp)//60
         self.upgrade_candle(ptr_start, ptr_end)
 
     def upgrade_candle(self, ptr1, ptr2):
+        # Todo: candles have 0 inside
         # Todo: find pointer to accelerate
+        start_time = self.buffer[ptr1, 0] - self.buffer[ptr1, 0] % (60 * 60 * 24)
         # init empty candles of various size according to self.time_intervals
         cache_candle = {interval: np.zeros([interval, 5], dtype=np.float64) for interval in self.time_intervals}
+        cache_pointer = {interval: 0 for interval in self.time_intervals}
+        for interval in self.time_intervals:
+            for ptr, tmp in enumerate(self.candles[interval]):
+                if abs(start_time - tmp[0]) < 0.001:
+                    cache_pointer[interval] = ptr
+                    break
 
+        ptr1 = ptr1 - ptr1 % 1440
+        ptr2 -= 1
+        ptr2 = ptr2 - ptr2 % 1440 + bool(ptr2 % 1440) * 1440
+        ptr2 += 1
         # access self.buffer[ptr1:ptr2] once and upgrade all intervals
-        for tick in self.buffer[ptr1: ptr2]:  # TODO: check here, ptr2 might buggy
-            # tick: timestamp, open, high, low, close
-            # tmp = len(slice)//time_interval
-            ...
+        for index, tick in enumerate(self.buffer[ptr1: ptr2]):  # TODO: check here, ptr2 might buggy
+            for interval in self.time_intervals:
+                cache_candle[interval][index % interval] = tick
+                if interval - index % interval == 1:
+                    self.candles[interval][index//interval + cache_pointer[interval]] = np.array([cache_candle[interval][0, 0], cache_candle[interval][0, 1], np.max(cache_candle[interval][:, 1:]), np.min(cache_candle[interval][:, 1:]), cache_candle[interval][-1, 2]], dtype=np.float64)
 
-        for time_interval in self.time_intervals:
-            ...
-        pass
+
 
 
 if __name__ == "__main__":
