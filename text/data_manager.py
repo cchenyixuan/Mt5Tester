@@ -102,7 +102,7 @@ class DataManager:
         if mt5.initialize(login=self.login, server=self.server, password=self.password):
             self.load_rates(time_from=time_from, time_to=time_to)
             # shut down connection to the MetaTrader 5 terminal
-            # mt5.shutdown()  # TODO better solution
+            mt5.shutdown()  # TODO better solution
         else:
             print("initialize() failed, error code =", mt5.last_error())
 
@@ -463,7 +463,6 @@ class DataManager:
 if __name__ == "__main__":
     # try:
         manager = DataManager()
-        manager()
         print(manager.pairs["USDJPY"].candles[1])
         # print(manager.pairs["USDJPY"].candles[5])
         for _start in range(60, 300):
