@@ -123,7 +123,27 @@ class DataClass:
             for interval in self.time_intervals:
                 cache_candle[interval][index % interval] = tick
                 if interval - index % interval == 1:
-                    self.candles[interval][index//interval + cache_pointer[interval]] = np.array([cache_candle[interval][0, 0], cache_candle[interval][0, 1], np.max(cache_candle[interval][:, 1:]), np.min(cache_candle[interval][:, 1:]), cache_candle[interval][-1, 2]], dtype=np.float64)
+                    if abs(cache_candle[interval][-1, 4]) < 1e-6 and interval != 1:  # current candle, not full filled
+                        tail = -2
+                        while abs(cache_candle[interval][tail, 4]) < 1e-6:
+                            if -tail == interval:
+                                break
+                            tail -= 1
+                        self.candles[interval][index//interval + cache_pointer[interval]] = np.array([cache_candle[interval][0, 0], cache_candle[interval][0, 1], np.max(cache_candle[interval][:, 1:]), np.min(cache_candle[interval][:tail+1, 1:]), cache_candle[interval][tail, 4]], dtype=np.float64)
+                    elif abs(cache_candle[interval][0, 4]) < 1e-6 and interval != 1:  # initial candle, not full filled
+                        head = 1
+                        while abs(cache_candle[interval][head, 4]) < 1e-6:
+                            if head == interval-1:
+                                break
+                            head += 1
+
+                        self.candles[interval][index // interval + cache_pointer[interval]] = np.array(
+                            [cache_candle[interval][0, 0], cache_candle[interval][head, 1],
+                             np.max(cache_candle[interval][:, 1:]), np.min(cache_candle[interval][head:, 1:]),
+                             cache_candle[interval][-1, 4]], dtype=np.float64)
+
+                    else:
+                        self.candles[interval][index//interval + cache_pointer[interval]] = np.array([cache_candle[interval][0, 0], cache_candle[interval][0, 1], np.max(cache_candle[interval][:, 1:]), np.min(cache_candle[interval][:, 1:]), cache_candle[interval][-1, 4]], dtype=np.float64)
 
 
 

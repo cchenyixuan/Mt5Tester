@@ -65,6 +65,15 @@ class TextRenderer:
         glVertexAttribPointer(0, 4, GL_FLOAT, GL_FALSE, 16, ctypes.c_void_p(0))
 
     def render_text(self, text, x, y, scale, color=(1.0, 1.0, 1.0)):
+        """
+        Do Not Call This Function Directly!
+        :param text:
+        :param x:
+        :param y:
+        :param scale:
+        :param color:
+        :return:
+        """
         glUseProgram(self.shader)
         textColor_loc = glGetUniformLocation(self.shader, "textColor")
         glUniform3f(textColor_loc, color[0], color[1], color[2])
@@ -100,6 +109,7 @@ class TextRenderer:
     def render_with_encoding(self, text, x, y, scale, color, line_width=40):
         start_x = x
         start_y = y
+        text = str(text)  # force type conversion
         text += "\n"
         import re
         find_mark = re.compile(r"(.*?[\n\t])", re.S)

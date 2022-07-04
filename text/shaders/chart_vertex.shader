@@ -13,12 +13,14 @@ out VertexAttri{
 }vertex_attri;
 
 uniform mat4 projection;
+uniform mat4 scaling;
+uniform mat4 translation;
 uniform int offset;
 void main()
 {
     //gl_Position = vec4(Candle_id-960, data[Candle_id].w+90, 0.0, 1.0);
     vertex_attri.index = Candle_id;
-    vertex_attri.pos = vec4(Candle_id*10-960, data[Candle_id+offset].w, 0.0, 1.0);  // -960--
+    vertex_attri.pos = vec4(Candle_id*10, data[Candle_id+offset].w, 0.0, 1.0);  // -960--
     if(data[Candle_id+offset].x > data[Candle_id+offset].w){
         vertex_attri.market = vec4(data[Candle_id+offset].zwxy);
     }

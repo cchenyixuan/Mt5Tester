@@ -80,7 +80,7 @@ class DataManager:
             "USDJPY": DataClass("USDJPY", time_from, time_to),
         }
         self.candles = {}
-        self.time_interval = "1m"
+        self.time_interval = 1
 
         self.time_from = time_from
         self.time_to = time_to
@@ -161,8 +161,9 @@ class DataManager:
             print("Unmatched TimeStamps!")
 
     def c_call(self):
+        time.sleep(10)
         while True:
-            time.sleep(1)
+            time.sleep(10)
             self.__call__()
 
     def mt5_load_ticks(self, time_from, time_to):
