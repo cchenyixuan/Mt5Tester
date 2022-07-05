@@ -176,8 +176,8 @@ class DataManager:
             print("initialize() failed, error code =", mt5.last_error())
 
     def __call__(self):
-        tomorrow = datetime.utcfromtimestamp(time.time() + 86400.0)
-        today = datetime.utcfromtimestamp(time.time()-86400.0*3)
+        tomorrow = datetime.utcfromtimestamp(time.time() + 86400.0*2)
+        today = datetime.utcfromtimestamp(time.time()-86400.0)
         self.time_to = (tomorrow.year, tomorrow.month, tomorrow.day)
         print((today.year, today.month, today.day), self.time_to)  # debug
         self.mt5_load_rates((today.year, today.month, today.day), self.time_to)
