@@ -8,7 +8,6 @@ from OpenGL.GL.shaders import compileProgram, compileShader
 class Chart:
     def __init__(self, data_manager, coin_pair="EURUSD", time_interval=1):
         self.data_manager = data_manager
-        # self.data_manager(time_interval)  # auto refresh, additional-call is no more required
 
         self.sbo = glGenBuffers(1)
         self.vao = glGenVertexArrays(1)
@@ -36,9 +35,13 @@ class Chart:
         self.translation_loc = glGetUniformLocation(self.shader, "translation")
         self.cursor_loc = glGetUniformLocation(self.shader, "cursor")
         self.offset_loc = glGetUniformLocation(self.shader, "offset")
+        self.coin_pair_id_loc = glGetUniformLocation(self.shader, "coin_pair_id")
+        self.time_interval_loc = glGetUniformLocation(self.shader, "time_interval")
 
         self.coin_pair = coin_pair
         self.time_interval = time_interval
+        self.coin_pair_id = ["AUDCAD", "AUDCHF", "AUDJPY", "AUDUSD", "CADCHF", "CADJPY", "CHFJPY", "EURAUD", "EURCAD", "EURCHF", "EURGBP", "EURJPY", "EURUSD", "GBPAUD", "GBPCAD", "GBPCHF", "GBPJPY", "GBPUSD", "USDCAD", "USDCHF", "USDJPY"].index(coin_pair)
+
 
         # TODO: reforge here to apply auto-scaling with visible part
         self.begin = 0
@@ -54,18 +57,26 @@ class Chart:
         self._position_of_0 = self.data_manager.pairs[self.coin_pair].candles[self.time_interval].shape[0] + self._position_of_0
         # TODO: Above need check and debug.
 
-        # self._position_of_0 = 0
-        # while self.data_manager.candles[self.time_interval][coin_pair][self._position_of_0][0]:
-        #     self._position_of_0 += 1
-
-        # self._max = np.max(self.data_manager.candles[self.time_interval][coin_pair][:min(self._position_of_0, 100000)][:, :-1])
-        # self._min = np.min(self.data_manager.candles[self.time_interval][coin_pair][:min(self._position_of_0, 100000)][:, :-1])
-        # self.draw_candles(900 * (self.data_manager.candles[self.time_interval][coin_pair][:, :-1] - self._min) / (self._max - self._min) - 450)
         self.max_length = self._position_of_0
 
-    def redraw(self, coin_pair, time_interval):
+    def auto_scale(self):
+        self.begin = 0
+        self.end = self.begin + 160  # 160 is max-candle-number for current candle size
+        self._translate = np.min(self.data_manager.pairs[self.coin_pair].candles[self.time_interval][self.begin: self.end, 1:])
+        self._scale = 1080 / (
+                np.max(self.data_manager.pairs[self.coin_pair].candles[self.time_interval][self.begin: self.end,
+                           1:]) - self._translate + 1e-8)  # avoid ZeroDivisionError
+        self.draw_candles()
+        self._position_of_0 = -1
+        while not self.data_manager.pairs[self.coin_pair].candles[self.time_interval][self._position_of_0, -1]:
+            self._position_of_0 -= 1
+        self._position_of_0 = self.data_manager.pairs[self.coin_pair].candles[self.time_interval].shape[0] + self._position_of_0
+        self.max_length = self._position_of_0
+
+    def redraw_coin_pair(self, coin_pair):
         self.coin_pair = coin_pair
-        self.time_interval = time_interval
+        self.coin_pair_id = ["AUDCAD", "AUDCHF", "AUDJPY", "AUDUSD", "CADCHF", "CADJPY", "CHFJPY", "EURAUD", "EURCAD", "EURCHF", "EURGBP", "EURJPY", "EURUSD", "GBPAUD", "GBPCAD", "GBPCHF", "GBPJPY", "GBPUSD", "USDCAD", "USDCHF", "USDJPY"].index(coin_pair)
+
         # TODO: reforge here to apply auto-scaling with visible part
         self.begin = 0
         self.end = self.begin + 160  # 160 is max-candle-number for current candle size
@@ -125,6 +136,24 @@ class Chart:
         self._position_of_0 -= 1
         self.max_length = self._position_of_0
         glUseProgram(self.shader)
+
+        if self.data_manager.upgraded:
+            self.data_manager.upgraded = False
+            glBindBufferBase(GL_SHADER_STORAGE_BUFFER, 1, self.sbo)
+            for index, coin in enumerate(
+                    ["AUDCAD", "AUDCHF", "AUDJPY", "AUDUSD", "CADCHF", "CADJPY", "CHFJPY", "EURAUD", "EURCAD", "EURCHF",
+                     "EURGBP", "EURJPY", "EURUSD", "GBPAUD", "GBPCAD", "GBPCHF", "GBPJPY", "GBPUSD", "USDCAD", "USDCHF",
+                     "USDJPY"]):
+                # fill all buffer
+                for interval, offset_ in zip([1, 2, 3, 4, 5, 10, 15, 30, 45, 60, 120, 180, 240, 360, 720, 1440],
+                                            [0, 1600000, 2400000, 2933344, 3333344, 3653344, 3813344, 3920016, 3973360,
+                                             4008928, 4035600, 4048944, 4057840, 4064512, 4068960, 4071184]):
+                    glBufferSubData(
+                        GL_SHADER_STORAGE_BUFFER,  # target
+                        4072304 * index + offset_,  # offset
+                        np.array(self.data_manager.pairs[coin].candles[interval][:, 1:], dtype=np.float32)  # data
+                    )
+        """
         buffer_data = np.array(
             self.data_manager.pairs[self.coin_pair].candles[self.time_interval][:, 1:],
             dtype=np.float32
@@ -143,6 +172,11 @@ class Chart:
             buffer_data,
             GL_DYNAMIC_DRAW
         )
+        """
+
+        glUniform1i(self.coin_pair_id_loc, self.coin_pair_id)
+        glUniform1i(self.time_interval_loc, self.time_interval)
+
         x_pos = cursor_loc[0]
         y_pos = cursor_loc[1]
         cursor = pyrr.Vector3((x_pos, y_pos, 1.0))
@@ -165,7 +199,7 @@ class Chart:
         glBindVertexArray(self.vao)
         glDrawArrays(GL_POINTS, 0, min(self._position_of_0, 160))
 
-    def draw_candles(self, data=None) -> None:
+    def draw_candles(self) -> None:
         """
         geometry: 1600*900
         check data shape, if length > 1600, show 1600 else show length
@@ -173,21 +207,28 @@ class Chart:
         generate shader
         add to render
 
-        :param data:
         :return:
         """
-        buffer_data = np.array(
-            self.data_manager.pairs[self.coin_pair].candles[self.time_interval][:, 1:],
-            dtype=np.float32
-        )
         glBindBuffer(GL_SHADER_STORAGE_BUFFER, self.sbo)
         glBufferData(
             GL_SHADER_STORAGE_BUFFER,
-            buffer_data.nbytes,
-            buffer_data,
+            4072304 * 21,  # nbytes of SSBO
+            None,
             GL_DYNAMIC_DRAW
         )
         glBindBufferBase(GL_SHADER_STORAGE_BUFFER, 1, self.sbo)
+        for index, coin in enumerate(["AUDCAD", "AUDCHF", "AUDJPY", "AUDUSD", "CADCHF", "CADJPY", "CHFJPY", "EURAUD", "EURCAD", "EURCHF",
+                     "EURGBP", "EURJPY", "EURUSD", "GBPAUD", "GBPCAD", "GBPCHF", "GBPJPY", "GBPUSD", "USDCAD", "USDCHF",
+                     "USDJPY"]):
+            # fill all buffer
+            for interval, offset in zip([1, 2, 3, 4, 5, 10, 15, 30, 45, 60, 120, 180, 240, 360, 720, 1440],
+                                        [0, 1600000, 2400000, 2933344, 3333344, 3653344, 3813344, 3920016, 3973360, 4008928, 4035600, 4048944, 4057840, 4064512, 4068960, 4071184]):
+                glBufferSubData(
+                    GL_SHADER_STORAGE_BUFFER,  # target
+                    4072304*index+offset,  # offset
+                    np.array(self.data_manager.pairs[coin].candles[interval][:, 1:], dtype=np.float32)  # data
+                )
+
         index = np.array([*range(160)], dtype=np.int32)
 
         glBindVertexArray(self.vao)

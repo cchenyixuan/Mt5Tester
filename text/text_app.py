@@ -32,7 +32,7 @@ class DisplayPort:
         from data_manager import DataManager
         from datetime import datetime
         tomorrow = datetime.utcfromtimestamp(time.time() + 86400.0*2)
-        month_ago = datetime.utcfromtimestamp(time.time() - 86400.0*30)
+        month_ago = datetime.utcfromtimestamp(time.time() - 86400.0*7)
         self.data_manager = DataManager(
             time_from=(month_ago.year, month_ago.month, month_ago.day),
             time_to=(tomorrow.year, tomorrow.month, tomorrow.day),
@@ -110,6 +110,7 @@ class DisplayPort:
             glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA)
             renderer = TextRenderer(1920, 1080)
 
+        glEnable(GL_DEPTH_TEST)
         glfw.show_window(self.window)
         while not glfw.window_should_close(self.window):
             glfw.poll_events()
@@ -132,7 +133,7 @@ class DisplayPort:
                     text_color = (0.3, 0.8, 0.9)
                 if self.click and self.cursor_position[0] > 1160 and 19+30*step <= self.cursor_position[1] < 49+30*step and self.chart.coin_pair != pair:
                     print(pair)
-                    self.chart.coin_pair = pair
+                    self.chart.redraw_coin_pair(pair)
 
                 renderer.render_with_encoding(pair, 210, 500-30*step, 0.3, text_color, 30)
 #                 renderer.render_with_encoding(text_to_render, 310, 500-30*step, 0.3, text_color, 30)

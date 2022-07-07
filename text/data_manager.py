@@ -56,6 +56,7 @@ class DataManager:
         """
         init manager, connect mt5 server and get all ticks
         """
+        self.upgraded = False
         self.pairs = {
             "AUDCAD": DataClass("AUDCAD", time_from, time_to),
             "AUDCHF": DataClass("AUDCHF", time_from, time_to),
@@ -165,6 +166,7 @@ class DataManager:
         while True:
             time.sleep(10)
             self.__call__()
+            self.upgraded = True
 
     def mt5_load_ticks(self, time_from, time_to):
         # establish connection to MetaTrader 5 terminal
