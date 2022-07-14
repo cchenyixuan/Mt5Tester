@@ -112,12 +112,17 @@ class DisplayPort:
 
         glEnable(GL_DEPTH_TEST)
         glfw.show_window(self.window)
+
+        self.chart.draw_intensity()
+
         while not glfw.window_should_close(self.window):
             glfw.poll_events()
             glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
 
             self.chart(self.cursor_position, self.offset)
-            # self.chart.redraw(self.chart.coin_pair)  # TODO: bad idea! use glBufferSubData instead.
+            # TODO: This API needs DEBUG
+            # self.chart.draw_call_intensity(self.cursor_position, self.offset)
+
             if console:
                 renderer.render_with_encoding(console_buffer, -900, -400, 0.3, (np.sin(glfw.get_time()), 0.7, 0.2))
 

@@ -377,6 +377,8 @@ layout(std140, binding=2) buffer Intensity{
 layout(local_size_x=1, local_size_y=1, local_size_z=1) in;
 
 uint gid = gl_GlobalInvocationID.x;
+int index = int(gid);
+
 
 void Strength(int start, int period){
     if (start - period < 0){
@@ -2425,6 +2427,6 @@ void Strength(int start, int period){
 }
 
 void main() {
-
+    Strength(index, 4);
 
 }
