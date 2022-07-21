@@ -32,7 +32,7 @@ class DisplayPort:
         from data_manager import DataManager
         from datetime import datetime
         tomorrow = datetime.utcfromtimestamp(time.time() + 86400.0*2)
-        month_ago = datetime.utcfromtimestamp(time.time() - 86400.0*7)
+        month_ago = datetime.utcfromtimestamp(time.time() - 86400.0*30)
         self.data_manager = DataManager(
             time_from=(month_ago.year, month_ago.month, month_ago.day),
             time_to=(tomorrow.year, tomorrow.month, tomorrow.day),

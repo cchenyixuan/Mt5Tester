@@ -1,3 +1,5 @@
+import time
+
 import numpy as np
 from datetime import datetime
 import pytz
@@ -18,8 +20,9 @@ class DataClass:
         for i in range(self.buffer.shape[0]):
             self.buffer[i, 0] += self.utc_from_timestamp + 60 * i
 
-        self.candles = {}
         self.time_intervals = [1, 2, 3, 4, 5, 10, 15, 30, 45, 60, 120, 180, 240, 360, 720, 1440]
+        self.candles = {}
+        self.current = {interval: 0 for interval in self.time_intervals}
         for time_interval in self.time_intervals:
             if time_interval == 1:
                 self.candles[time_interval] = self.buffer
@@ -86,16 +89,16 @@ class DataClass:
             for step, timestamp in enumerate(self.buffer[pointer:]):
                 # if step != 0: print(step)  # debug
                 if abs(timestamp[0] - candle[0]) < 0.001:
-                    self.buffer[pointer + step][1] = np.array(candle[1], dtype=np.float64)
-                    self.buffer[pointer + step][2] = np.array(candle[2], dtype=np.float64)
-                    self.buffer[pointer + step][3] = np.array(candle[3], dtype=np.float64)
-                    self.buffer[pointer + step][4] = np.array(candle[4], dtype=np.float64)
+                    self.buffer[pointer + step][1:5] = np.array((candle[1], candle[2], candle[3], candle[4]), dtype=np.float64)
                     break
                 else:
                     self.buffer[pointer + step][1:5] = self.buffer[pointer + step - 1][1:5]
             pointer += (step + 1)
         # upgrade end ptr
         ptr_end = pointer
+        # upgrade current
+        for interval in self.time_intervals:
+            self.current[interval] = (ptr_end-1)//interval
         # buffer data upgraded, refresh candles
         # print(ptr_start, ptr_end)  # debug
         self.max_number = int(self.utc_to_timestamp-self.utc_from_timestamp)//60
@@ -144,7 +147,6 @@ class DataClass:
 
                     else:
                         self.candles[interval][index//interval + cache_pointer[interval]] = np.array([cache_candle[interval][0, 0], cache_candle[interval][0, 1], np.max(cache_candle[interval][:, 1:]), np.min(cache_candle[interval][:, 1:]), cache_candle[interval][-1, 4]], dtype=np.float64)
-
 
 
 

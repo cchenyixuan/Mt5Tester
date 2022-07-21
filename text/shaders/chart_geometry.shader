@@ -12,7 +12,7 @@ uniform mat4 projection;
 uniform mat4 scaling;
 uniform mat4 translation;
 uniform int offset;
-uniform vec3 cursor;
+uniform vec4 cursor;
 
 void build_candle(float x_position){
     V_Color = vec4(1.0, 0.9, 0.1, 1.0);

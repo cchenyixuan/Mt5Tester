@@ -165,8 +165,8 @@ class Chart:
 
         x_pos = cursor_loc[0]
         y_pos = cursor_loc[1]
-        cursor = pyrr.Vector3((x_pos, y_pos, 1.0))
-        glUniform3fv(self.cursor_loc, 1, cursor)
+        cursor = pyrr.Vector4((x_pos, y_pos, 1.0, 1.0))
+        glUniform4fv(self.cursor_loc, 1, cursor)
         glUniform1i(self.offset_loc, offset)
         # todo: upgrade chart if offset is changed
         self.begin = offset
@@ -241,7 +241,7 @@ class Chart:
     def draw_intensity(self):
         from utils.shader_program_pre_compiler import load_program
         self.intensity_shader = load_program(
-            r"C:\Users\ysugi\PycharmProjects\Mt5Tester\indicator\shaders/Intensity.bin")
+            r"C:\Users\cchen\PycharmProjects\Mt5Tester\utils/test.bin")
         self.intensity_vao = glGenVertexArrays(1)
         glBindVertexArray(self.intensity_vao)
         sbo = glGenBuffers(1)
@@ -255,13 +255,13 @@ class Chart:
         # debug
         # calculated_buffer = glGetBufferSubData(GL_SHADER_STORAGE_BUFFER, 0, buf.nbytes)
         # calculated_buffer = np.reshape(calculated_buffer, (4, 4*7, -1))
-        with open(r"C:\Users\ysugi\PycharmProjects\Mt5Tester\indicator\shaders/Intensity_vertex.shader", "r") as f:
+        with open(r"C:\Users\cchen\PycharmProjects\Mt5Tester\indicator\shaders/Intensity_vertex.shader", "r") as f:
             v_src = f.read()
             f.close()
-        with open(r"C:\Users\ysugi\PycharmProjects\Mt5Tester\indicator\shaders/Intensity_geometry.shader", "r") as f:
+        with open(r"C:\Users\cchen\PycharmProjects\Mt5Tester\indicator\shaders/Intensity_geometry.shader", "r") as f:
             g_src = f.read()
             f.close()
-        with open(r"C:\Users\ysugi\PycharmProjects\Mt5Tester\indicator\shaders/Intensity_fragment.shader", "r") as f:
+        with open(r"C:\Users\cchen\PycharmProjects\Mt5Tester\indicator\shaders/Intensity_fragment.shader", "r") as f:
             f_src = f.read()
             f.close()
         self.intensity_render_shader = compileProgram(compileShader(v_src, GL_VERTEX_SHADER),

@@ -11,6 +11,7 @@ uniform mat4 projection;
 uniform mat4 scaling;
 uniform mat4 translation;
 uniform int offset;
+uniform vec4 cursor;
 
 
 void build_ribbon(void){

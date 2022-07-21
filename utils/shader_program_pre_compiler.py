@@ -29,18 +29,55 @@ def load_program(load_dir="./dumped.bin"):
     return program
 
 
+def dump_shading_program(shaders: tuple, export_dir="./dumped.bin"):
+    program = compileProgram(*[compileShader(_src, _type) for _src, _type in shaders])
+    length = glGetProgramiv(program, GL_PROGRAM_BINARY_LENGTH)
+    shader_bin, shader_format, shader_length = glGetProgramBinary(program, length)
+    with open(export_dir, "wb") as f:
+        f.write(shader_format.tobytes())
+        f.write(shader_length.tobytes())
+        f.write(shader_bin.tobytes())
+        f.close()
+    print(f"Program dumped at {export_dir}.")
+
+
 if __name__ == "__main__":
     glfw.init()
     window = glfw.create_window(100, 100, "dump", None, None)
     glfw.hide_window(window)
     glfw.make_context_current(window)
-
-    shader_content = """"""
-    with open(r"C:\Users\ysugi\PycharmProjects\Mt5Tester\indicator\shaders\Intensity.shader", "r") as f:
-        for row in f:
-            shader_content += row
+    with open(r"C:\Users\cchen\PycharmProjects\Mt5Tester\indicator\shaders/Intensity.shader", "r") as f:
+        c_src = f.read()
         f.close()
-    dump_program(shader_content, GL_COMPUTE_SHADER)
-    shader = load_program()
+    dump_shading_program(((c_src, GL_COMPUTE_SHADER), ),
+                         export_dir="./IntensityCompute.bin")
+    with open(r"C:\Users\cchen\PycharmProjects\Mt5Tester\indicator\shaders/Intensity_vertex.shader", "r") as f:
+        v_src = f.read()
+        f.close()
+    with open(r"C:\Users\cchen\PycharmProjects\Mt5Tester\indicator\shaders/Intensity_geometry.shader", "r") as f:
+        g_src = f.read()
+        f.close()
+    with open(r"C:\Users\cchen\PycharmProjects\Mt5Tester\indicator\shaders/Intensity_fragment.shader", "r") as f:
+        f_src = f.read()
+        f.close()
+    dump_shading_program(((v_src, GL_VERTEX_SHADER), (g_src, GL_GEOMETRY_SHADER), (f_src, GL_FRAGMENT_SHADER)),
+                         export_dir="./IntensityRender.bin")
+    vertex_src = """"""
+    geometry_src = """"""
+    fragment_src = """"""
+    with open(r"C:\Users\cchen\PycharmProjects\Mt5Tester/text/shaders/chart_vertex.shader", "r") as f:
+        for row in f:
+            vertex_src += row
+        f.close()
+    with open(r"C:\Users\cchen\PycharmProjects\Mt5Tester/text/shaders/chart_geometry.shader", "r") as f:
+        for row in f:
+            geometry_src += row
+        f.close()
+    with open(r"C:\Users\cchen\PycharmProjects\Mt5Tester/text/shaders/demo_fragment.shader", "r") as f:
+        for row in f:
+            fragment_src += row
+        f.close()
+    dump_shading_program(((vertex_src, GL_VERTEX_SHADER), (geometry_src, GL_GEOMETRY_SHADER), (fragment_src, GL_FRAGMENT_SHADER)),
+                         export_dir="./CandleRender.bin")
 
     glfw.terminate()
