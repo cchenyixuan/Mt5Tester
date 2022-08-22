@@ -16,5 +16,9 @@ class ChartStatus:
 
     def __call__(self, arguments: dict):
         while arguments:
-            self.__setattr__(*arguments.popitem())
-        self.modified = True
+            a, b = arguments.popitem()
+            if self.__getattribute__(a) == b:
+                pass
+            else:
+                self.__setattr__(a, b)
+                self.modified = True

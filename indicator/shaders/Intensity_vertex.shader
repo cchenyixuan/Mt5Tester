@@ -376,6 +376,8 @@ layout(std140, binding=2) buffer Intensity{
 out VertexAttri{
     mat4 intensity;
     mat4 intensity_last;
+    mat4 intensity_dual;
+    mat4 intensity_dual_last;
     int index;
 }vertex_attri;
 
@@ -390,191 +392,254 @@ void main() {
     switch (coin_pair_id){
         case 0:
         vertex_attri.intensity = AUD[Candle_id+offset];
+        vertex_attri.intensity_dual = CAD[Candle_id+offset];
         if (Candle_id+offset<1){
             vertex_attri.intensity_last = AUD[Candle_id+offset];
+            vertex_attri.intensity_dual_last = CAD[Candle_id+offset];
         }
         else {
             vertex_attri.intensity_last = AUD[Candle_id+offset-1];
+            vertex_attri.intensity_dual_last = CAD[Candle_id+offset-1];
         }
         break;
         case 1:
         vertex_attri.intensity = AUD[Candle_id+offset];
+        vertex_attri.intensity_dual = CHF[Candle_id+offset];
         if (Candle_id+offset<1){
             vertex_attri.intensity_last = AUD[Candle_id+offset];
+            vertex_attri.intensity_dual_last = CHF[Candle_id+offset];
         }
         else {
             vertex_attri.intensity_last = AUD[Candle_id+offset-1];
+            vertex_attri.intensity_dual_last = CHF[Candle_id+offset-1];
         }
         break;
         case 2:
         vertex_attri.intensity = AUD[Candle_id+offset];
+        vertex_attri.intensity_dual = JPY[Candle_id+offset];
         if (Candle_id+offset<1){
             vertex_attri.intensity_last = AUD[Candle_id+offset];
+            vertex_attri.intensity_dual_last = JPY[Candle_id+offset];
         }
         else {
             vertex_attri.intensity_last = AUD[Candle_id+offset-1];
+            vertex_attri.intensity_dual_last = JPY[Candle_id+offset-1];
         }
         break;
         case 3:
         vertex_attri.intensity = AUD[Candle_id+offset];
+        vertex_attri.intensity_dual = USD[Candle_id+offset];
         if (Candle_id+offset<1){
             vertex_attri.intensity_last = AUD[Candle_id+offset];
+            vertex_attri.intensity_dual_last = USD[Candle_id+offset];
         }
         else {
             vertex_attri.intensity_last = AUD[Candle_id+offset-1];
+            vertex_attri.intensity_dual_last = USD[Candle_id+offset-1];
         }
         break;
         case 4:
         vertex_attri.intensity = CAD[Candle_id+offset];
+        vertex_attri.intensity_dual = CHF[Candle_id+offset];
         if (Candle_id+offset<1){
             vertex_attri.intensity_last = CAD[Candle_id+offset];
+            vertex_attri.intensity_dual_last = CHF[Candle_id+offset];
         }
         else {
             vertex_attri.intensity_last = CAD[Candle_id+offset-1];
+            vertex_attri.intensity_dual_last = CHF[Candle_id+offset-1];
         }
         break;
         case 5:
         vertex_attri.intensity = CAD[Candle_id+offset];
+        vertex_attri.intensity_dual = JPY[Candle_id+offset];
         if (Candle_id+offset<1){
             vertex_attri.intensity_last = CAD[Candle_id+offset];
+            vertex_attri.intensity_dual_last = JPY[Candle_id+offset];
         }
         else {
             vertex_attri.intensity_last = CAD[Candle_id+offset-1];
+            vertex_attri.intensity_dual_last = JPY[Candle_id+offset-1];
         }
         break;
         case 6:
         vertex_attri.intensity = CHF[Candle_id+offset];
+        vertex_attri.intensity_dual = JPY[Candle_id+offset];
         if (Candle_id+offset<1){
             vertex_attri.intensity_last = CHF[Candle_id+offset];
+            vertex_attri.intensity_dual_last = JPY[Candle_id+offset];
         }
         else {
             vertex_attri.intensity_last = CHF[Candle_id+offset-1];
+            vertex_attri.intensity_dual_last = JPY[Candle_id+offset-1];
         }
         break;
         case 7:
         vertex_attri.intensity = EUR[Candle_id+offset];
+        vertex_attri.intensity_dual = AUD[Candle_id+offset];
         if (Candle_id+offset<1){
             vertex_attri.intensity_last = EUR[Candle_id+offset];
+            vertex_attri.intensity_dual_last = AUD[Candle_id+offset];
         }
         else {
             vertex_attri.intensity_last = EUR[Candle_id+offset-1];
+            vertex_attri.intensity_dual_last = AUD[Candle_id+offset-1];
         }
         break;
         case 8:
         vertex_attri.intensity = EUR[Candle_id+offset];
+        vertex_attri.intensity_dual = CAD[Candle_id+offset];
         if (Candle_id+offset<1){
             vertex_attri.intensity_last = EUR[Candle_id+offset];
+            vertex_attri.intensity_dual_last = CAD[Candle_id+offset];
         }
         else {
             vertex_attri.intensity_last = EUR[Candle_id+offset-1];
+            vertex_attri.intensity_dual_last = CAD[Candle_id+offset-1];
         }
         break;
         case 9:
         vertex_attri.intensity = EUR[Candle_id+offset];
+        vertex_attri.intensity_dual = CHF[Candle_id+offset];
         if (Candle_id+offset<1){
             vertex_attri.intensity_last = EUR[Candle_id+offset];
+            vertex_attri.intensity_dual_last = CHF[Candle_id+offset];
         }
         else {
             vertex_attri.intensity_last = EUR[Candle_id+offset-1];
+            vertex_attri.intensity_dual_last = CHF[Candle_id+offset-1];
         }
         break;
         case 10:
         vertex_attri.intensity = EUR[Candle_id+offset];
+        vertex_attri.intensity_dual = GBP[Candle_id+offset];
         if (Candle_id+offset<1){
             vertex_attri.intensity_last = EUR[Candle_id+offset];
+            vertex_attri.intensity_dual_last = GBP[Candle_id+offset];
         }
         else {
             vertex_attri.intensity_last = EUR[Candle_id+offset-1];
+            vertex_attri.intensity_dual_last = GBP[Candle_id+offset-1];
         }
         break;
         case 11:
         vertex_attri.intensity = EUR[Candle_id+offset];
+        vertex_attri.intensity_dual = JPY[Candle_id+offset];
         if (Candle_id+offset<1){
             vertex_attri.intensity_last = EUR[Candle_id+offset];
+            vertex_attri.intensity_dual_last = JPY[Candle_id+offset];
         }
         else {
             vertex_attri.intensity_last = EUR[Candle_id+offset-1];
+            vertex_attri.intensity_dual_last = JPY[Candle_id+offset-1];
         }
         break;
         case 12:
         vertex_attri.intensity = EUR[Candle_id+offset];
+        vertex_attri.intensity_dual = USD[Candle_id+offset];
         if (Candle_id+offset<1){
             vertex_attri.intensity_last = EUR[Candle_id+offset];
+            vertex_attri.intensity_dual_last = USD[Candle_id+offset];
         }
         else {
             vertex_attri.intensity_last = EUR[Candle_id+offset-1];
+            vertex_attri.intensity_dual_last = USD[Candle_id+offset-1];
         }
         break;
         case 13:
         vertex_attri.intensity = GBP[Candle_id+offset];
+        vertex_attri.intensity_dual = AUD[Candle_id+offset];
         if (Candle_id+offset<1){
             vertex_attri.intensity_last = GBP[Candle_id+offset];
+            vertex_attri.intensity_dual_last = AUD[Candle_id+offset];
         }
         else {
             vertex_attri.intensity_last = GBP[Candle_id+offset-1];
+            vertex_attri.intensity_dual_last = AUD[Candle_id+offset-1];
         }
         break;
         case 14:
         vertex_attri.intensity = GBP[Candle_id+offset];
+        vertex_attri.intensity_dual = CAD[Candle_id+offset];
         if (Candle_id+offset<1){
             vertex_attri.intensity_last = GBP[Candle_id+offset];
+            vertex_attri.intensity_dual_last = CAD[Candle_id+offset];
         }
         else {
             vertex_attri.intensity_last = GBP[Candle_id+offset-1];
+            vertex_attri.intensity_dual_last = CAD[Candle_id+offset-1];
         }
         break;
         case 15:
         vertex_attri.intensity = GBP[Candle_id+offset];
+        vertex_attri.intensity_dual = CHF[Candle_id+offset];
         if (Candle_id+offset<1){
             vertex_attri.intensity_last = GBP[Candle_id+offset];
+            vertex_attri.intensity_dual_last = CHF[Candle_id+offset];
         }
         else {
             vertex_attri.intensity_last = GBP[Candle_id+offset-1];
+            vertex_attri.intensity_dual_last = CHF[Candle_id+offset-1];
         }
         break;
         case 16:
         vertex_attri.intensity = GBP[Candle_id+offset];
+        vertex_attri.intensity_dual = JPY[Candle_id+offset];
         if (Candle_id+offset<1){
             vertex_attri.intensity_last = GBP[Candle_id+offset];
+            vertex_attri.intensity_dual_last = JPY[Candle_id+offset];
         }
         else {
             vertex_attri.intensity_last = GBP[Candle_id+offset-1];
+            vertex_attri.intensity_dual_last = JPY[Candle_id+offset-1];
         }
         break;
         case 17:
         vertex_attri.intensity = GBP[Candle_id+offset];
+        vertex_attri.intensity_dual = USD[Candle_id+offset];
         if (Candle_id+offset<1){
             vertex_attri.intensity_last = GBP[Candle_id+offset];
+            vertex_attri.intensity_dual_last = USD[Candle_id+offset];
         }
         else {
             vertex_attri.intensity_last = GBP[Candle_id+offset-1];
+            vertex_attri.intensity_dual_last = USD[Candle_id+offset-1];
         }
         break;
         case 18:
         vertex_attri.intensity = USD[Candle_id+offset];
+        vertex_attri.intensity_dual = CAD[Candle_id+offset];
         if (Candle_id+offset<1){
             vertex_attri.intensity_last = USD[Candle_id+offset];
+            vertex_attri.intensity_dual_last = CAD[Candle_id+offset];
         }
         else {
             vertex_attri.intensity_last = USD[Candle_id+offset-1];
+            vertex_attri.intensity_dual_last = CAD[Candle_id+offset-1];
         }
         break;
         case 19:
         vertex_attri.intensity = USD[Candle_id+offset];
+        vertex_attri.intensity_dual = CHF[Candle_id+offset];
         if (Candle_id+offset<1){
             vertex_attri.intensity_last = USD[Candle_id+offset];
+            vertex_attri.intensity_dual_last = CHF[Candle_id+offset];
         }
         else {
             vertex_attri.intensity_last = USD[Candle_id+offset-1];
+            vertex_attri.intensity_dual_last = CHF[Candle_id+offset-1];
         }
         break;
         case 20:
         vertex_attri.intensity = USD[Candle_id+offset];
+        vertex_attri.intensity_dual = JPY[Candle_id+offset];
         if (Candle_id+offset<1){
             vertex_attri.intensity_last = USD[Candle_id+offset];
+            vertex_attri.intensity_dual_last = JPY[Candle_id+offset];
         }
         else {
             vertex_attri.intensity_last = USD[Candle_id+offset-1];
+            vertex_attri.intensity_dual_last = JPY[Candle_id+offset-1];
         }
         break;
 

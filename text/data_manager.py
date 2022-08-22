@@ -20,7 +20,7 @@ import MetaTrader5 as mt5
 print("MetaTrader5 package author: ", mt5.__author__)
 print("MetaTrader5 package version: ", mt5.__version__)
 
-from dataclass import DataClass
+from text.dataclass import DataClass
 
 
 class TimeSpawnOverSizeError(BaseException):
@@ -162,9 +162,9 @@ class DataManager:
             print("Unmatched TimeStamps!")
 
     def c_call(self):
-        time.sleep(10)
+        time.sleep(1)
         while True:
-            time.sleep(10)
+            time.sleep(1)
             self.__call__()
             self.upgraded = True
 
