@@ -376,14 +376,25 @@ layout(std140, binding=2) buffer Intensity{
 };
 layout(local_size_x=1, local_size_y=1, local_size_z=1) in;
 
+uniform int anchor;
+
 uint gid = gl_GlobalInvocationID.x;
-int index = int(gid);
+int index = int(gid) + anchor;
 
 
 void Strength(int start, int period){
     if (start - period < 0){
         period = start;
     }
+    // init target memory
+    USD[start] = mat4(0.0);
+    AUD[start] = mat4(0.0);
+    JPY[start] = mat4(0.0);
+    CHF[start] = mat4(0.0);
+    GBP[start] = mat4(0.0);
+    EUR[start] = mat4(0.0);
+    CAD[start] = mat4(0.0);
+
     // AUDCAD
     if (AUDCAD_candle_1[(start+1)/1-1].w > AUDCAD_candle_1[(start+1)/1-1-period].w){
         AUD[start][0].x += 1;

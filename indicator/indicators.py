@@ -1,6 +1,7 @@
 import numpy as np
 import ctypes
 
+
 class SimpleMovingAverage:
     def __init__(self, data, length):
         self.data = data
@@ -49,6 +50,24 @@ class ExponentialMovingAverage:
         self.results = [data[i] for i in range(self.length - 1)] + [self.first_day_sma]
         for i in range(self.length, len(data)):
             self.results.extend([self.calculate(data[i])])
+
+    def __getitem__(self, item):
+        return self.results[item]
+
+
+class LinearlyWeightedMovingAverage:
+    def __init__(self, data, length):
+        self.data = data
+        self.length = length
+        self.results = [data[i] for i in range(length - 1)] + [self.calculate(data[i:i + length]) for i in
+                                                               range(len(data) - length + 1)]
+
+    def calculate(self, value):
+        return np.sum([value[i]*i for i in range(1, self.length+1)]) / sum(range(1, self.length+1))
+
+    def __call__(self, data):
+        self.results = [data[i] for i in range(self.length - 1)] + [self.calculate(data[i:i + self.length]) for i in
+                                                                    range(len(data) - self.length + 1)]
 
     def __getitem__(self, item):
         return self.results[item]

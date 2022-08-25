@@ -7,7 +7,7 @@ from OpenGL.GL import *
 import glfw
 from OpenGL.GL.shaders import compileProgram, compileShader
 
-from components import chart, candle_chart, intensity_chart
+from components import chart, candle_chart, intensity_chart, moving_average_chart
 from text.text_manager import TextRenderer
 
 
@@ -46,8 +46,9 @@ class DisplayPort:
                 "time_interval": 1,
                 "begin": 0,
                 "end": 0,
-                "current": self.data_manager.pairs["AUDCAD"].current[1],
+                "current": min([self.data_manager.pairs[_pair_].current[1] for _pair_ in self.coin_pairs]),
                 "selected": 0,
+                "anchor": 0,
                 "data_manager": self.data_manager,
 
             }
@@ -55,6 +56,7 @@ class DisplayPort:
         glfw.make_context_current(self.window)
         self.candle_chart = candle_chart.CandleChart(self.status)
         self.intensity_chart = intensity_chart.IntensityChart(self.status)
+        self.moving_average_chart = moving_average_chart.MovingAverageChart(self.status)
 
     def __call__(self, *args, **kwargs):
         renderer = TextRenderer(1920, 1400)
@@ -71,10 +73,12 @@ class DisplayPort:
             glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
 
             self.status({"current": min([self.data_manager.pairs[_pair_].current[1] for _pair_ in self.coin_pairs]),
+                         "anchor": max((0, min([self.data_manager.pairs[_pair_].current[1] for _pair_ in self.coin_pairs])-200))
                          })
 
             self.candle_chart()
             self.intensity_chart()
+            self.moving_average_chart()
             renderer.render_text(f"{self.status.coin_pairs[self.status.coin_pair_id]}", 600, 500, 0.5)
 
             self.status.modified = False

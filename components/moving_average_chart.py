@@ -4,14 +4,14 @@ from OpenGL.GL import *
 from utils.shader_program_pre_compiler import load_program
 
 
-class IntensityChart:
+class MovingAverageChart:
     def __init__(self, status):
         # common status shared between charts
         self.status = status
 
         # private variables
-        self.compute_shader = load_program(r".\indicator\shaders\IntensityCompute.bin")
-        self.render_shader = load_program(r".\indicator\shaders\IntensityRender.bin")
+        self.compute_shader = load_program(r".\indicator\shaders\SimpleMovingAverageCompute.bin")
+        self.render_shader = load_program(r".\indicator\shaders\SimpleMovingAverageRender.bin")
 
         # gl buffer objects
         self.vao = glGenVertexArrays(1)
@@ -28,6 +28,7 @@ class IntensityChart:
         self.cursor_loc = glGetUniformLocation(self.render_shader, "cursor")
         self.offset_loc = glGetUniformLocation(self.render_shader, "offset")
         self.coin_pair_id_loc = glGetUniformLocation(self.render_shader, "coin_pair_id")
+        self.time_interval_loc = glGetUniformLocation(self.render_shader, "time_interval")
 
         # initialize GPU variables
         self.maintain_buffer(init=True)
@@ -41,7 +42,8 @@ class IntensityChart:
         # draw call
         glUseProgram(self.render_shader)
         glBindVertexArray(self.vao)
-        glDrawArrays(GL_POINTS, 0, min(self.status.current-self.status.offset+1, 160))
+        glLineWidth(3)
+        glDrawArrays(GL_LINE_STRIP, 0, min(self.status.current-self.status.offset+1, 160))
 
     def maintain_buffer(self, init=False):
         if init:
@@ -49,9 +51,9 @@ class IntensityChart:
             glBindVertexArray(self.vao)
             # compute_sbo
             glBindBuffer(GL_SHADER_STORAGE_BUFFER, self.compute_sbo)
-            buf = np.zeros((4 * 4 * 100000 * 7,), dtype=np.float32)
+            buf = np.zeros((4 * 4 * 100000 * 21,), dtype=np.float32)
             glBufferData(GL_SHADER_STORAGE_BUFFER, buf.nbytes, buf, GL_DYNAMIC_DRAW)
-            glBindBufferBase(GL_SHADER_STORAGE_BUFFER, 2, self.compute_sbo)
+            glBindBufferBase(GL_SHADER_STORAGE_BUFFER, 3, self.compute_sbo)
             # render_sbo
             glBindBuffer(GL_SHADER_STORAGE_BUFFER, self.render_sbo)
             glBufferData(
@@ -106,10 +108,10 @@ class IntensityChart:
             glEnableVertexAttribArray(0)
             glVertexAttribIPointer(0, 1, GL_INT, 4, ctypes.c_void_p(0))
 
-            # upgrade moving-average buffer
+            # upgrade intensity buffer
             glUseProgram(self.compute_shader)
             glUniform1i(self.anchor_loc, 0)
-            glDispatchCompute(self.status.current + 1 - self.status.anchor + 1, 1, 1)
+            glDispatchCompute(self.status.current + 1 -self.status.anchor+1, 1, 1)
             glMemoryBarrier(GL_SHADER_STORAGE_BARRIER_BIT)
 
         else:
@@ -117,7 +119,7 @@ class IntensityChart:
 
             if self.status.data_manager.upgraded:
                 # glBindBuffer(GL_SHADER_STORAGE_BUFFER, self.compute_sbo)
-                # buf = np.zeros((4 * 4 * 100000 * 7,), dtype=np.float32)
+                # buf = np.zeros((4 * 4 * 100000 * 21,), dtype=np.float32)
                 # glBufferData(GL_SHADER_STORAGE_BUFFER, buf.nbytes, buf, GL_DYNAMIC_DRAW)
                 glBindBuffer(GL_SHADER_STORAGE_BUFFER, self.render_sbo)
                 for index, coin in enumerate([
@@ -158,7 +160,7 @@ class IntensityChart:
                             4072304 * index + offset,  # offset
                             np.array(self.status.data_manager.pairs[coin].candles[interval][:, 1:], dtype=np.float32)
                         )
-                # upgrade moving-average buffer
+                # upgrade intensity buffer
                 glUseProgram(self.compute_shader)
                 glUniform1i(self.anchor_loc, self.status.anchor)
                 glDispatchCompute(self.status.current + 1 - self.status.anchor + 1, 1, 1)
@@ -168,17 +170,59 @@ class IntensityChart:
         if init:
             glUseProgram(self.render_shader)
             glUniformMatrix4fv(self.projection_loc, 1, GL_FALSE,
-                               pyrr.matrix44.create_orthogonal_projection_matrix(0, 1920, -360, 1000, -1600, 100))
-            glUniformMatrix4fv(self.scaling_loc, 1, GL_FALSE,
-                               pyrr.matrix44.create_from_scale(np.array((1.0, 1.0, 1.0), dtype=np.float32)))
-            glUniformMatrix4fv(self.translation_loc, 1, GL_FALSE,
-                               pyrr.matrix44.create_from_translation(np.array((0.0, 0.0, 0.0), dtype=np.float32)))
+                               pyrr.matrix44.create_orthogonal_projection_matrix(0, 1920, -500, 800, -1600, 100))
+            lower_boundary = np.min(
+                self.status.data_manager.pairs[self.status.coin_pairs[self.status.coin_pair_id]].candles[
+                    self.status.time_interval][
+                self.status.offset: self.status.offset + min(self.status.current - self.status.offset + 1, 160), 1:])
+            upper_boundary = np.max(
+                self.status.data_manager.pairs[self.status.coin_pairs[self.status.coin_pair_id]].candles[
+                    self.status.time_interval][
+                self.status.offset: self.status.offset + min(self.status.current - self.status.offset + 1, 160), 1:])
+            scale_factor = 800 / (upper_boundary - lower_boundary + 1e-8)  # avoid ZeroDivisionError
+            glUniformMatrix4fv(
+                self.scaling_loc,
+                1,
+                GL_FALSE,
+                pyrr.matrix44.create_from_scale(np.array((1.0, scale_factor, 1.0), dtype=np.float32))
+            )
+            glUniformMatrix4fv(
+                self.translation_loc,
+                1,
+                GL_FALSE,
+                pyrr.matrix44.create_from_translation(np.array((0.0, -lower_boundary, 0.0), dtype=np.float32))
+            )
             glUniform4fv(self.cursor_loc, 1, pyrr.Vector4(self.status.cursor))
             glUniform1i(self.offset_loc, self.status.offset)
             glUniform1i(self.coin_pair_id_loc, self.status.coin_pair_id)
+            glUniform1i(self.time_interval_loc, self.status.time_interval)
         else:
             if self.status.modified:
                 glUseProgram(self.render_shader)
+                lower_boundary = np.min(
+                    self.status.data_manager.pairs[self.status.coin_pairs[self.status.coin_pair_id]].candles[
+                        self.status.time_interval][
+                    self.status.offset: self.status.offset + min(self.status.current - self.status.offset + 1, 160),
+                    1:])
+                upper_boundary = np.max(
+                    self.status.data_manager.pairs[self.status.coin_pairs[self.status.coin_pair_id]].candles[
+                        self.status.time_interval][
+                    self.status.offset: self.status.offset + min(self.status.current - self.status.offset + 1, 160),
+                    1:])
+                scale_factor = 800 / (upper_boundary - lower_boundary + 1e-8)  # avoid ZeroDivisionError
+                glUniformMatrix4fv(
+                    self.scaling_loc,
+                    1,
+                    GL_FALSE,
+                    pyrr.matrix44.create_from_scale(np.array((1.0, scale_factor, 1.0), dtype=np.float32))
+                )
+                glUniformMatrix4fv(
+                    self.translation_loc,
+                    1,
+                    GL_FALSE,
+                    pyrr.matrix44.create_from_translation(np.array((0.0, -lower_boundary, 0.0), dtype=np.float32))
+                )
                 glUniform4fv(self.cursor_loc, 1, pyrr.Vector4(self.status.cursor))
                 glUniform1i(self.offset_loc, self.status.offset)
                 glUniform1i(self.coin_pair_id_loc, self.status.coin_pair_id)
+                glUniform1i(self.time_interval_loc, self.status.time_interval)

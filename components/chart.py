@@ -11,6 +11,7 @@ class ChartStatus:
         self.end = 0
         self.current = 0
         self.selected = 0
+        self.anchor = 0
         self.data_manager = object
         self.modified = False
 
