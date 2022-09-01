@@ -103,7 +103,7 @@ class CandleChart:
 
         else:
             # upgrade data and buffer if is required
-            if self.status.data_manager.upgraded:
+            if self.status.data_manager.upgraded and not self.status.data_manager.upgrading:
                 glUseProgram(self.render_shader)
                 glBindVertexArray(self.vao)
                 glBindBuffer(GL_SHADER_STORAGE_BUFFER, self.render_sbo)

@@ -393,1103 +393,1153 @@ uniform mat4 scaling;
 uniform mat4 translation;
 uniform int offset;
 uniform int coin_pair_id;
-uniform int time_interval;
+uniform int time_length;
 void main(){
     switch (coin_pair_id){
         case 0:
-        switch (time_interval){
+        switch (time_length){
             case 1:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, AUDCAD[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, AUDCAD[offset+Candle_id][0].x, 1.0, 1.0);
             break;
             case 2:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, AUDCAD[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, AUDCAD[offset+Candle_id][0].y, 2.0, 1.0);
             break;
             case 3:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, AUDCAD[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, AUDCAD[offset+Candle_id][0].z, 3.0, 1.0);
             break;
             case 4:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, AUDCAD[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, AUDCAD[offset+Candle_id][0].w, 4.0, 1.0);
             break;
             case 5:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, AUDCAD[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, AUDCAD[offset+Candle_id][1].x, 5.0, 1.0);
             break;
             case 10:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, AUDCAD[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, AUDCAD[offset+Candle_id][1].y, 10.0, 1.0);
             break;
             case 15:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, AUDCAD[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, AUDCAD[offset+Candle_id][1].z, 15.0, 1.0);
             break;
             case 30:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, AUDCAD[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, AUDCAD[offset+Candle_id][1].w, 30.0, 1.0);
             break;
             case 45:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, AUDCAD[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, AUDCAD[offset+Candle_id][2].x, 45.0, 1.0);
             break;
             case 60:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, AUDCAD[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, AUDCAD[offset+Candle_id][2].y, 60.0, 1.0);
             break;
             case 120:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, AUDCAD[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, AUDCAD[offset+Candle_id][2].z, 120.0, 1.0);
             break;
             case 180:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, AUDCAD[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, AUDCAD[offset+Candle_id][2].w, 180.0, 1.0);
             break;
             case 240:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, AUDCAD[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, AUDCAD[offset+Candle_id][3].x, 240.0, 1.0);
             break;
             case 360:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, AUDCAD[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, AUDCAD[offset+Candle_id][3].y, 360.0, 1.0);
             break;
             case 720:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, AUDCAD[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, AUDCAD[offset+Candle_id][3].z, 720.0, 1.0);
             break;
             case 1440:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, AUDCAD[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, AUDCAD[offset+Candle_id][3].w, 1440.0, 1.0);
             break;
         }
         break;
         case 1:
-        switch (time_interval){
+        switch (time_length){
             case 1:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, AUDCHF[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, AUDCHF[offset+Candle_id][0].x, 1.0, 1.0);
             break;
             case 2:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, AUDCHF[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, AUDCHF[offset+Candle_id][0].y, 2.0, 1.0);
             break;
             case 3:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, AUDCHF[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, AUDCHF[offset+Candle_id][0].z, 3.0, 1.0);
             break;
             case 4:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, AUDCHF[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, AUDCHF[offset+Candle_id][0].w, 4.0, 1.0);
             break;
             case 5:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, AUDCHF[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, AUDCHF[offset+Candle_id][1].x, 5.0, 1.0);
             break;
             case 10:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, AUDCHF[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, AUDCHF[offset+Candle_id][1].y, 10.0, 1.0);
             break;
             case 15:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, AUDCHF[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, AUDCHF[offset+Candle_id][1].z, 15.0, 1.0);
             break;
             case 30:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, AUDCHF[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, AUDCHF[offset+Candle_id][1].w, 30.0, 1.0);
             break;
             case 45:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, AUDCHF[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, AUDCHF[offset+Candle_id][2].x, 45.0, 1.0);
             break;
             case 60:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, AUDCHF[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, AUDCHF[offset+Candle_id][2].y, 60.0, 1.0);
             break;
             case 120:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, AUDCHF[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, AUDCHF[offset+Candle_id][2].z, 120.0, 1.0);
             break;
             case 180:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, AUDCHF[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, AUDCHF[offset+Candle_id][2].w, 180.0, 1.0);
             break;
             case 240:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, AUDCHF[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, AUDCHF[offset+Candle_id][3].x, 240.0, 1.0);
             break;
             case 360:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, AUDCHF[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, AUDCHF[offset+Candle_id][3].y, 360.0, 1.0);
             break;
             case 720:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, AUDCHF[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, AUDCHF[offset+Candle_id][3].z, 720.0, 1.0);
             break;
             case 1440:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, AUDCHF[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, AUDCHF[offset+Candle_id][3].w, 1440.0, 1.0);
             break;
         }
         break;
         case 2:
-        switch (time_interval){
+        switch (time_length){
             case 1:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, AUDJPY[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, AUDJPY[offset+Candle_id][0].x, 1.0, 1.0);
             break;
             case 2:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, AUDJPY[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, AUDJPY[offset+Candle_id][0].y, 2.0, 1.0);
             break;
             case 3:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, AUDJPY[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, AUDJPY[offset+Candle_id][0].z, 3.0, 1.0);
             break;
             case 4:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, AUDJPY[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, AUDJPY[offset+Candle_id][0].w, 4.0, 1.0);
             break;
             case 5:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, AUDJPY[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, AUDJPY[offset+Candle_id][1].x, 5.0, 1.0);
             break;
             case 10:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, AUDJPY[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, AUDJPY[offset+Candle_id][1].y, 10.0, 1.0);
             break;
             case 15:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, AUDJPY[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, AUDJPY[offset+Candle_id][1].z, 15.0, 1.0);
             break;
             case 30:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, AUDJPY[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, AUDJPY[offset+Candle_id][1].w, 30.0, 1.0);
             break;
             case 45:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, AUDJPY[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, AUDJPY[offset+Candle_id][2].x, 45.0, 1.0);
             break;
             case 60:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, AUDJPY[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, AUDJPY[offset+Candle_id][2].y, 60.0, 1.0);
             break;
             case 120:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, AUDJPY[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, AUDJPY[offset+Candle_id][2].z, 120.0, 1.0);
             break;
             case 180:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, AUDJPY[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, AUDJPY[offset+Candle_id][2].w, 180.0, 1.0);
             break;
             case 240:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, AUDJPY[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, AUDJPY[offset+Candle_id][3].x, 240.0, 1.0);
             break;
             case 360:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, AUDJPY[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, AUDJPY[offset+Candle_id][3].y, 360.0, 1.0);
             break;
             case 720:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, AUDJPY[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, AUDJPY[offset+Candle_id][3].z, 720.0, 1.0);
             break;
             case 1440:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, AUDJPY[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, AUDJPY[offset+Candle_id][3].w, 1440.0, 1.0);
             break;
         }
         break;
         case 3:
-        switch (time_interval){
+        switch (time_length){
             case 1:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, AUDUSD[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, AUDUSD[offset+Candle_id][0].x, 1.0, 1.0);
             break;
             case 2:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, AUDUSD[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, AUDUSD[offset+Candle_id][0].y, 2.0, 1.0);
             break;
             case 3:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, AUDUSD[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, AUDUSD[offset+Candle_id][0].z, 3.0, 1.0);
             break;
             case 4:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, AUDUSD[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, AUDUSD[offset+Candle_id][0].w, 4.0, 1.0);
             break;
             case 5:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, AUDUSD[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, AUDUSD[offset+Candle_id][1].x, 5.0, 1.0);
             break;
             case 10:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, AUDUSD[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, AUDUSD[offset+Candle_id][1].y, 10.0, 1.0);
             break;
             case 15:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, AUDUSD[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, AUDUSD[offset+Candle_id][1].z, 15.0, 1.0);
             break;
             case 30:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, AUDUSD[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, AUDUSD[offset+Candle_id][1].w, 30.0, 1.0);
             break;
             case 45:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, AUDUSD[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, AUDUSD[offset+Candle_id][2].x, 45.0, 1.0);
             break;
             case 60:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, AUDUSD[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, AUDUSD[offset+Candle_id][2].y, 60.0, 1.0);
             break;
             case 120:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, AUDUSD[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, AUDUSD[offset+Candle_id][2].z, 120.0, 1.0);
             break;
             case 180:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, AUDUSD[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, AUDUSD[offset+Candle_id][2].w, 180.0, 1.0);
             break;
             case 240:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, AUDUSD[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, AUDUSD[offset+Candle_id][3].x, 240.0, 1.0);
             break;
             case 360:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, AUDUSD[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, AUDUSD[offset+Candle_id][3].y, 360.0, 1.0);
             break;
             case 720:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, AUDUSD[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, AUDUSD[offset+Candle_id][3].z, 720.0, 1.0);
             break;
             case 1440:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, AUDUSD[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, AUDUSD[offset+Candle_id][3].w, 1440.0, 1.0);
             break;
         }
         break;
         case 4:
-        switch (time_interval){
+        switch (time_length){
             case 1:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, CADCHF[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, CADCHF[offset+Candle_id][0].x, 1.0, 1.0);
             break;
             case 2:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, CADCHF[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, CADCHF[offset+Candle_id][0].y, 2.0, 1.0);
             break;
             case 3:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, CADCHF[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, CADCHF[offset+Candle_id][0].z, 3.0, 1.0);
             break;
             case 4:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, CADCHF[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, CADCHF[offset+Candle_id][0].w, 4.0, 1.0);
             break;
             case 5:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, CADCHF[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, CADCHF[offset+Candle_id][1].x, 5.0, 1.0);
             break;
             case 10:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, CADCHF[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, CADCHF[offset+Candle_id][1].y, 10.0, 1.0);
             break;
             case 15:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, CADCHF[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, CADCHF[offset+Candle_id][1].z, 15.0, 1.0);
             break;
             case 30:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, CADCHF[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, CADCHF[offset+Candle_id][1].w, 30.0, 1.0);
             break;
             case 45:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, CADCHF[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, CADCHF[offset+Candle_id][2].x, 45.0, 1.0);
             break;
             case 60:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, CADCHF[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, CADCHF[offset+Candle_id][2].y, 60.0, 1.0);
             break;
             case 120:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, CADCHF[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, CADCHF[offset+Candle_id][2].z, 120.0, 1.0);
             break;
             case 180:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, CADCHF[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, CADCHF[offset+Candle_id][2].w, 180.0, 1.0);
             break;
             case 240:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, CADCHF[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, CADCHF[offset+Candle_id][3].x, 240.0, 1.0);
             break;
             case 360:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, CADCHF[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, CADCHF[offset+Candle_id][3].y, 360.0, 1.0);
             break;
             case 720:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, CADCHF[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, CADCHF[offset+Candle_id][3].z, 720.0, 1.0);
             break;
             case 1440:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, CADCHF[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, CADCHF[offset+Candle_id][3].w, 1440.0, 1.0);
             break;
         }
         break;
         case 5:
-        switch (time_interval){
+        switch (time_length){
             case 1:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, CADJPY[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, CADJPY[offset+Candle_id][0].x, 1.0, 1.0);
             break;
             case 2:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, CADJPY[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, CADJPY[offset+Candle_id][0].y, 2.0, 1.0);
             break;
             case 3:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, CADJPY[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, CADJPY[offset+Candle_id][0].z, 3.0, 1.0);
             break;
             case 4:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, CADJPY[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, CADJPY[offset+Candle_id][0].w, 4.0, 1.0);
             break;
             case 5:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, CADJPY[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, CADJPY[offset+Candle_id][1].x, 5.0, 1.0);
             break;
             case 10:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, CADJPY[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, CADJPY[offset+Candle_id][1].y, 10.0, 1.0);
             break;
             case 15:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, CADJPY[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, CADJPY[offset+Candle_id][1].z, 15.0, 1.0);
             break;
             case 30:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, CADJPY[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, CADJPY[offset+Candle_id][1].w, 30.0, 1.0);
             break;
             case 45:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, CADJPY[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, CADJPY[offset+Candle_id][2].x, 45.0, 1.0);
             break;
             case 60:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, CADJPY[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, CADJPY[offset+Candle_id][2].y, 60.0, 1.0);
             break;
             case 120:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, CADJPY[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, CADJPY[offset+Candle_id][2].z, 120.0, 1.0);
             break;
             case 180:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, CADJPY[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, CADJPY[offset+Candle_id][2].w, 180.0, 1.0);
             break;
             case 240:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, CADJPY[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, CADJPY[offset+Candle_id][3].x, 240.0, 1.0);
             break;
             case 360:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, CADJPY[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, CADJPY[offset+Candle_id][3].y, 360.0, 1.0);
             break;
             case 720:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, CADJPY[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, CADJPY[offset+Candle_id][3].z, 720.0, 1.0);
             break;
             case 1440:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, CADJPY[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, CADJPY[offset+Candle_id][3].w, 1440.0, 1.0);
             break;
         }
         break;
         case 6:
-        switch (time_interval){
+        switch (time_length){
             case 1:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, CHFJPY[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, CHFJPY[offset+Candle_id][0].x, 1.0, 1.0);
             break;
             case 2:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, CHFJPY[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, CHFJPY[offset+Candle_id][0].y, 2.0, 1.0);
             break;
             case 3:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, CHFJPY[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, CHFJPY[offset+Candle_id][0].z, 3.0, 1.0);
             break;
             case 4:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, CHFJPY[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, CHFJPY[offset+Candle_id][0].w, 4.0, 1.0);
             break;
             case 5:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, CHFJPY[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, CHFJPY[offset+Candle_id][1].x, 5.0, 1.0);
             break;
             case 10:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, CHFJPY[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, CHFJPY[offset+Candle_id][1].y, 10.0, 1.0);
             break;
             case 15:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, CHFJPY[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, CHFJPY[offset+Candle_id][1].z, 15.0, 1.0);
             break;
             case 30:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, CHFJPY[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, CHFJPY[offset+Candle_id][1].w, 30.0, 1.0);
             break;
             case 45:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, CHFJPY[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, CHFJPY[offset+Candle_id][2].x, 45.0, 1.0);
             break;
             case 60:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, CHFJPY[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, CHFJPY[offset+Candle_id][2].y, 60.0, 1.0);
             break;
             case 120:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, CHFJPY[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, CHFJPY[offset+Candle_id][2].z, 120.0, 1.0);
             break;
             case 180:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, CHFJPY[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, CHFJPY[offset+Candle_id][2].w, 180.0, 1.0);
             break;
             case 240:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, CHFJPY[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, CHFJPY[offset+Candle_id][3].x, 240.0, 1.0);
             break;
             case 360:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, CHFJPY[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, CHFJPY[offset+Candle_id][3].y, 360.0, 1.0);
             break;
             case 720:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, CHFJPY[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, CHFJPY[offset+Candle_id][3].z, 720.0, 1.0);
             break;
             case 1440:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, CHFJPY[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, CHFJPY[offset+Candle_id][3].w, 1440.0, 1.0);
             break;
         }
         break;
         case 7:
-        switch (time_interval){
+        switch (time_length){
             case 1:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, EURAUD[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, EURAUD[offset+Candle_id][0].x, 1.0, 1.0);
             break;
             case 2:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, EURAUD[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, EURAUD[offset+Candle_id][0].y, 2.0, 1.0);
             break;
             case 3:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, EURAUD[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, EURAUD[offset+Candle_id][0].z, 3.0, 1.0);
             break;
             case 4:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, EURAUD[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, EURAUD[offset+Candle_id][0].w, 4.0, 1.0);
             break;
             case 5:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, EURAUD[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, EURAUD[offset+Candle_id][1].x, 5.0, 1.0);
             break;
             case 10:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, EURAUD[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, EURAUD[offset+Candle_id][1].y, 10.0, 1.0);
             break;
             case 15:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, EURAUD[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, EURAUD[offset+Candle_id][1].z, 15.0, 1.0);
             break;
             case 30:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, EURAUD[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, EURAUD[offset+Candle_id][1].w, 30.0, 1.0);
             break;
             case 45:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, EURAUD[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, EURAUD[offset+Candle_id][2].x, 45.0, 1.0);
             break;
             case 60:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, EURAUD[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, EURAUD[offset+Candle_id][2].y, 60.0, 1.0);
             break;
             case 120:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, EURAUD[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, EURAUD[offset+Candle_id][2].z, 120.0, 1.0);
             break;
             case 180:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, EURAUD[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, EURAUD[offset+Candle_id][2].w, 180.0, 1.0);
             break;
             case 240:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, EURAUD[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, EURAUD[offset+Candle_id][3].x, 240.0, 1.0);
             break;
             case 360:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, EURAUD[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, EURAUD[offset+Candle_id][3].y, 360.0, 1.0);
             break;
             case 720:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, EURAUD[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, EURAUD[offset+Candle_id][3].z, 720.0, 1.0);
             break;
             case 1440:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, EURAUD[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, EURAUD[offset+Candle_id][3].w, 1440.0, 1.0);
             break;
         }
         break;
         case 8:
-        switch (time_interval){
+        switch (time_length){
             case 1:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, EURCAD[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, EURCAD[offset+Candle_id][0].x, 1.0, 1.0);
             break;
             case 2:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, EURCAD[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, EURCAD[offset+Candle_id][0].y, 2.0, 1.0);
             break;
             case 3:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, EURCAD[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, EURCAD[offset+Candle_id][0].z, 3.0, 1.0);
             break;
             case 4:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, EURCAD[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, EURCAD[offset+Candle_id][0].w, 4.0, 1.0);
             break;
             case 5:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, EURCAD[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, EURCAD[offset+Candle_id][1].x, 5.0, 1.0);
             break;
             case 10:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, EURCAD[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, EURCAD[offset+Candle_id][1].y, 10.0, 1.0);
             break;
             case 15:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, EURCAD[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, EURCAD[offset+Candle_id][1].z, 15.0, 1.0);
             break;
             case 30:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, EURCAD[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, EURCAD[offset+Candle_id][1].w, 30.0, 1.0);
             break;
             case 45:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, EURCAD[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, EURCAD[offset+Candle_id][2].x, 45.0, 1.0);
             break;
             case 60:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, EURCAD[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, EURCAD[offset+Candle_id][2].y, 60.0, 1.0);
             break;
             case 120:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, EURCAD[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, EURCAD[offset+Candle_id][2].z, 120.0, 1.0);
             break;
             case 180:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, EURCAD[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, EURCAD[offset+Candle_id][2].w, 180.0, 1.0);
             break;
             case 240:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, EURCAD[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, EURCAD[offset+Candle_id][3].x, 240.0, 1.0);
             break;
             case 360:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, EURCAD[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, EURCAD[offset+Candle_id][3].y, 360.0, 1.0);
             break;
             case 720:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, EURCAD[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, EURCAD[offset+Candle_id][3].z, 720.0, 1.0);
             break;
             case 1440:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, EURCAD[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, EURCAD[offset+Candle_id][3].w, 1440.0, 1.0);
             break;
         }
         break;
         case 9:
-        switch (time_interval){
+        switch (time_length){
             case 1:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, EURCHF[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, EURCHF[offset+Candle_id][0].x, 1.0, 1.0);
             break;
             case 2:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, EURCHF[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, EURCHF[offset+Candle_id][0].y, 2.0, 1.0);
             break;
             case 3:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, EURCHF[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, EURCHF[offset+Candle_id][0].z, 3.0, 1.0);
             break;
             case 4:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, EURCHF[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, EURCHF[offset+Candle_id][0].w, 4.0, 1.0);
             break;
             case 5:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, EURCHF[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, EURCHF[offset+Candle_id][1].x, 5.0, 1.0);
             break;
             case 10:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, EURCHF[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, EURCHF[offset+Candle_id][1].y, 10.0, 1.0);
             break;
             case 15:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, EURCHF[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, EURCHF[offset+Candle_id][1].z, 15.0, 1.0);
             break;
             case 30:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, EURCHF[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, EURCHF[offset+Candle_id][1].w, 30.0, 1.0);
             break;
             case 45:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, EURCHF[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, EURCHF[offset+Candle_id][2].x, 45.0, 1.0);
             break;
             case 60:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, EURCHF[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, EURCHF[offset+Candle_id][2].y, 60.0, 1.0);
             break;
             case 120:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, EURCHF[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, EURCHF[offset+Candle_id][2].z, 120.0, 1.0);
             break;
             case 180:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, EURCHF[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, EURCHF[offset+Candle_id][2].w, 180.0, 1.0);
             break;
             case 240:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, EURCHF[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, EURCHF[offset+Candle_id][3].x, 240.0, 1.0);
             break;
             case 360:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, EURCHF[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, EURCHF[offset+Candle_id][3].y, 360.0, 1.0);
             break;
             case 720:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, EURCHF[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, EURCHF[offset+Candle_id][3].z, 720.0, 1.0);
             break;
             case 1440:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, EURCHF[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, EURCHF[offset+Candle_id][3].w, 1440.0, 1.0);
             break;
         }
         break;
         case 10:
-        switch (time_interval){
+        switch (time_length){
             case 1:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, EURGBP[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, EURGBP[offset+Candle_id][0].x, 1.0, 1.0);
             break;
             case 2:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, EURGBP[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, EURGBP[offset+Candle_id][0].y, 2.0, 1.0);
             break;
             case 3:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, EURGBP[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, EURGBP[offset+Candle_id][0].z, 3.0, 1.0);
             break;
             case 4:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, EURGBP[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, EURGBP[offset+Candle_id][0].w, 4.0, 1.0);
             break;
             case 5:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, EURGBP[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, EURGBP[offset+Candle_id][1].x, 5.0, 1.0);
             break;
             case 10:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, EURGBP[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, EURGBP[offset+Candle_id][1].y, 10.0, 1.0);
             break;
             case 15:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, EURGBP[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, EURGBP[offset+Candle_id][1].z, 15.0, 1.0);
             break;
             case 30:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, EURGBP[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, EURGBP[offset+Candle_id][1].w, 30.0, 1.0);
             break;
             case 45:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, EURGBP[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, EURGBP[offset+Candle_id][2].x, 45.0, 1.0);
             break;
             case 60:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, EURGBP[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, EURGBP[offset+Candle_id][2].y, 60.0, 1.0);
             break;
             case 120:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, EURGBP[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, EURGBP[offset+Candle_id][2].z, 120.0, 1.0);
             break;
             case 180:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, EURGBP[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, EURGBP[offset+Candle_id][2].w, 180.0, 1.0);
             break;
             case 240:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, EURGBP[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, EURGBP[offset+Candle_id][3].x, 240.0, 1.0);
             break;
             case 360:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, EURGBP[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, EURGBP[offset+Candle_id][3].y, 360.0, 1.0);
             break;
             case 720:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, EURGBP[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, EURGBP[offset+Candle_id][3].z, 720.0, 1.0);
             break;
             case 1440:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, EURGBP[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, EURGBP[offset+Candle_id][3].w, 1440.0, 1.0);
             break;
         }
         break;
         case 11:
-        switch (time_interval){
+        switch (time_length){
             case 1:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, EURJPY[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, EURJPY[offset+Candle_id][0].x, 1.0, 1.0);
             break;
             case 2:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, EURJPY[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, EURJPY[offset+Candle_id][0].y, 2.0, 1.0);
             break;
             case 3:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, EURJPY[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, EURJPY[offset+Candle_id][0].z, 3.0, 1.0);
             break;
             case 4:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, EURJPY[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, EURJPY[offset+Candle_id][0].w, 4.0, 1.0);
             break;
             case 5:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, EURJPY[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, EURJPY[offset+Candle_id][1].x, 5.0, 1.0);
             break;
             case 10:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, EURJPY[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, EURJPY[offset+Candle_id][1].y, 10.0, 1.0);
             break;
             case 15:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, EURJPY[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, EURJPY[offset+Candle_id][1].z, 15.0, 1.0);
             break;
             case 30:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, EURJPY[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, EURJPY[offset+Candle_id][1].w, 30.0, 1.0);
             break;
             case 45:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, EURJPY[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, EURJPY[offset+Candle_id][2].x, 45.0, 1.0);
             break;
             case 60:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, EURJPY[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, EURJPY[offset+Candle_id][2].y, 60.0, 1.0);
             break;
             case 120:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, EURJPY[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, EURJPY[offset+Candle_id][2].z, 120.0, 1.0);
             break;
             case 180:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, EURJPY[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, EURJPY[offset+Candle_id][2].w, 180.0, 1.0);
             break;
             case 240:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, EURJPY[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, EURJPY[offset+Candle_id][3].x, 240.0, 1.0);
             break;
             case 360:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, EURJPY[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, EURJPY[offset+Candle_id][3].y, 360.0, 1.0);
             break;
             case 720:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, EURJPY[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, EURJPY[offset+Candle_id][3].z, 720.0, 1.0);
             break;
             case 1440:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, EURJPY[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, EURJPY[offset+Candle_id][3].w, 1440.0, 1.0);
             break;
         }
         break;
         case 12:
-        switch (time_interval){
+        switch (time_length){
             case 1:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, EURUSD[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, EURUSD[offset+Candle_id][0].x, 1.0, 1.0);
             break;
             case 2:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, EURUSD[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, EURUSD[offset+Candle_id][0].y, 2.0, 1.0);
             break;
             case 3:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, EURUSD[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, EURUSD[offset+Candle_id][0].z, 3.0, 1.0);
             break;
             case 4:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, EURUSD[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, EURUSD[offset+Candle_id][0].w, 4.0, 1.0);
             break;
             case 5:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, EURUSD[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, EURUSD[offset+Candle_id][1].x, 5.0, 1.0);
             break;
             case 10:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, EURUSD[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, EURUSD[offset+Candle_id][1].y, 10.0, 1.0);
             break;
             case 15:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, EURUSD[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, EURUSD[offset+Candle_id][1].z, 15.0, 1.0);
             break;
             case 30:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, EURUSD[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, EURUSD[offset+Candle_id][1].w, 30.0, 1.0);
             break;
             case 45:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, EURUSD[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, EURUSD[offset+Candle_id][2].x, 45.0, 1.0);
             break;
             case 60:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, EURUSD[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, EURUSD[offset+Candle_id][2].y, 60.0, 1.0);
             break;
             case 120:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, EURUSD[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, EURUSD[offset+Candle_id][2].z, 120.0, 1.0);
             break;
             case 180:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, EURUSD[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, EURUSD[offset+Candle_id][2].w, 180.0, 1.0);
             break;
             case 240:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, EURUSD[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, EURUSD[offset+Candle_id][3].x, 240.0, 1.0);
             break;
             case 360:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, EURUSD[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, EURUSD[offset+Candle_id][3].y, 360.0, 1.0);
             break;
             case 720:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, EURUSD[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, EURUSD[offset+Candle_id][3].z, 720.0, 1.0);
             break;
             case 1440:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, EURUSD[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, EURUSD[offset+Candle_id][3].w, 1440.0, 1.0);
             break;
         }
         break;
         case 13:
-        switch (time_interval){
+        switch (time_length){
             case 1:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, GBPAUD[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, GBPAUD[offset+Candle_id][0].x, 1.0, 1.0);
             break;
             case 2:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, GBPAUD[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, GBPAUD[offset+Candle_id][0].y, 2.0, 1.0);
             break;
             case 3:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, GBPAUD[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, GBPAUD[offset+Candle_id][0].z, 3.0, 1.0);
             break;
             case 4:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, GBPAUD[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, GBPAUD[offset+Candle_id][0].w, 4.0, 1.0);
             break;
             case 5:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, GBPAUD[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, GBPAUD[offset+Candle_id][1].x, 5.0, 1.0);
             break;
             case 10:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, GBPAUD[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, GBPAUD[offset+Candle_id][1].y, 10.0, 1.0);
             break;
             case 15:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, GBPAUD[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, GBPAUD[offset+Candle_id][1].z, 15.0, 1.0);
             break;
             case 30:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, GBPAUD[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, GBPAUD[offset+Candle_id][1].w, 30.0, 1.0);
             break;
             case 45:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, GBPAUD[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, GBPAUD[offset+Candle_id][2].x, 45.0, 1.0);
             break;
             case 60:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, GBPAUD[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, GBPAUD[offset+Candle_id][2].y, 60.0, 1.0);
             break;
             case 120:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, GBPAUD[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, GBPAUD[offset+Candle_id][2].z, 120.0, 1.0);
             break;
             case 180:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, GBPAUD[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, GBPAUD[offset+Candle_id][2].w, 180.0, 1.0);
             break;
             case 240:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, GBPAUD[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, GBPAUD[offset+Candle_id][3].x, 240.0, 1.0);
             break;
             case 360:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, GBPAUD[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, GBPAUD[offset+Candle_id][3].y, 360.0, 1.0);
             break;
             case 720:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, GBPAUD[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, GBPAUD[offset+Candle_id][3].z, 720.0, 1.0);
             break;
             case 1440:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, GBPAUD[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, GBPAUD[offset+Candle_id][3].w, 1440.0, 1.0);
             break;
         }
         break;
         case 14:
-        switch (time_interval){
+        switch (time_length){
             case 1:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, GBPCAD[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, GBPCAD[offset+Candle_id][0].x, 1.0, 1.0);
             break;
             case 2:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, GBPCAD[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, GBPCAD[offset+Candle_id][0].y, 2.0, 1.0);
             break;
             case 3:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, GBPCAD[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, GBPCAD[offset+Candle_id][0].z, 3.0, 1.0);
             break;
             case 4:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, GBPCAD[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, GBPCAD[offset+Candle_id][0].w, 4.0, 1.0);
             break;
             case 5:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, GBPCAD[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, GBPCAD[offset+Candle_id][1].x, 5.0, 1.0);
             break;
             case 10:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, GBPCAD[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, GBPCAD[offset+Candle_id][1].y, 10.0, 1.0);
             break;
             case 15:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, GBPCAD[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, GBPCAD[offset+Candle_id][1].z, 15.0, 1.0);
             break;
             case 30:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, GBPCAD[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, GBPCAD[offset+Candle_id][1].w, 30.0, 1.0);
             break;
             case 45:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, GBPCAD[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, GBPCAD[offset+Candle_id][2].x, 45.0, 1.0);
             break;
             case 60:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, GBPCAD[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, GBPCAD[offset+Candle_id][2].y, 60.0, 1.0);
             break;
             case 120:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, GBPCAD[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, GBPCAD[offset+Candle_id][2].z, 120.0, 1.0);
             break;
             case 180:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, GBPCAD[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, GBPCAD[offset+Candle_id][2].w, 180.0, 1.0);
             break;
             case 240:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, GBPCAD[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, GBPCAD[offset+Candle_id][3].x, 240.0, 1.0);
             break;
             case 360:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, GBPCAD[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, GBPCAD[offset+Candle_id][3].y, 360.0, 1.0);
             break;
             case 720:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, GBPCAD[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, GBPCAD[offset+Candle_id][3].z, 720.0, 1.0);
             break;
             case 1440:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, GBPCAD[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, GBPCAD[offset+Candle_id][3].w, 1440.0, 1.0);
             break;
         }
         break;
         case 15:
-        switch (time_interval){
+        switch (time_length){
             case 1:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, GBPCHF[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, GBPCHF[offset+Candle_id][0].x, 1.0, 1.0);
             break;
             case 2:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, GBPCHF[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, GBPCHF[offset+Candle_id][0].y, 2.0, 1.0);
             break;
             case 3:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, GBPCHF[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, GBPCHF[offset+Candle_id][0].z, 3.0, 1.0);
             break;
             case 4:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, GBPCHF[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, GBPCHF[offset+Candle_id][0].w, 4.0, 1.0);
             break;
             case 5:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, GBPCHF[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, GBPCHF[offset+Candle_id][1].x, 5.0, 1.0);
             break;
             case 10:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, GBPCHF[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, GBPCHF[offset+Candle_id][1].y, 10.0, 1.0);
             break;
             case 15:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, GBPCHF[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, GBPCHF[offset+Candle_id][1].z, 15.0, 1.0);
             break;
             case 30:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, GBPCHF[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, GBPCHF[offset+Candle_id][1].w, 30.0, 1.0);
             break;
             case 45:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, GBPCHF[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, GBPCHF[offset+Candle_id][2].x, 45.0, 1.0);
             break;
             case 60:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, GBPCHF[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, GBPCHF[offset+Candle_id][2].y, 60.0, 1.0);
             break;
             case 120:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, GBPCHF[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, GBPCHF[offset+Candle_id][2].z, 120.0, 1.0);
             break;
             case 180:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, GBPCHF[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, GBPCHF[offset+Candle_id][2].w, 180.0, 1.0);
             break;
             case 240:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, GBPCHF[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, GBPCHF[offset+Candle_id][3].x, 240.0, 1.0);
             break;
             case 360:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, GBPCHF[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, GBPCHF[offset+Candle_id][3].y, 360.0, 1.0);
             break;
             case 720:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, GBPCHF[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, GBPCHF[offset+Candle_id][3].z, 720.0, 1.0);
             break;
             case 1440:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, GBPCHF[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, GBPCHF[offset+Candle_id][3].w, 1440.0, 1.0);
             break;
         }
         break;
         case 16:
-        switch (time_interval){
+        switch (time_length){
             case 1:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, GBPJPY[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, GBPJPY[offset+Candle_id][0].x, 1.0, 1.0);
             break;
             case 2:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, GBPJPY[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, GBPJPY[offset+Candle_id][0].y, 2.0, 1.0);
             break;
             case 3:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, GBPJPY[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, GBPJPY[offset+Candle_id][0].z, 3.0, 1.0);
             break;
             case 4:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, GBPJPY[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, GBPJPY[offset+Candle_id][0].w, 4.0, 1.0);
             break;
             case 5:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, GBPJPY[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, GBPJPY[offset+Candle_id][1].x, 5.0, 1.0);
             break;
             case 10:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, GBPJPY[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, GBPJPY[offset+Candle_id][1].y, 10.0, 1.0);
             break;
             case 15:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, GBPJPY[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, GBPJPY[offset+Candle_id][1].z, 15.0, 1.0);
             break;
             case 30:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, GBPJPY[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, GBPJPY[offset+Candle_id][1].w, 30.0, 1.0);
             break;
             case 45:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, GBPJPY[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, GBPJPY[offset+Candle_id][2].x, 45.0, 1.0);
             break;
             case 60:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, GBPJPY[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, GBPJPY[offset+Candle_id][2].y, 60.0, 1.0);
             break;
             case 120:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, GBPJPY[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, GBPJPY[offset+Candle_id][2].z, 120.0, 1.0);
             break;
             case 180:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, GBPJPY[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, GBPJPY[offset+Candle_id][2].w, 180.0, 1.0);
             break;
             case 240:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, GBPJPY[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, GBPJPY[offset+Candle_id][3].x, 240.0, 1.0);
             break;
             case 360:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, GBPJPY[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, GBPJPY[offset+Candle_id][3].y, 360.0, 1.0);
             break;
             case 720:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, GBPJPY[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, GBPJPY[offset+Candle_id][3].z, 720.0, 1.0);
             break;
             case 1440:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, GBPJPY[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, GBPJPY[offset+Candle_id][3].w, 1440.0, 1.0);
             break;
         }
         break;
         case 17:
-        switch (time_interval){
+        switch (time_length){
             case 1:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, GBPUSD[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, GBPUSD[offset+Candle_id][0].x, 1.0, 1.0);
             break;
             case 2:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, GBPUSD[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, GBPUSD[offset+Candle_id][0].y, 2.0, 1.0);
             break;
             case 3:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, GBPUSD[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, GBPUSD[offset+Candle_id][0].z, 3.0, 1.0);
             break;
             case 4:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, GBPUSD[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, GBPUSD[offset+Candle_id][0].w, 4.0, 1.0);
             break;
             case 5:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, GBPUSD[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, GBPUSD[offset+Candle_id][1].x, 5.0, 1.0);
             break;
             case 10:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, GBPUSD[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, GBPUSD[offset+Candle_id][1].y, 10.0, 1.0);
             break;
             case 15:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, GBPUSD[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, GBPUSD[offset+Candle_id][1].z, 15.0, 1.0);
             break;
             case 30:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, GBPUSD[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, GBPUSD[offset+Candle_id][1].w, 30.0, 1.0);
             break;
             case 45:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, GBPUSD[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, GBPUSD[offset+Candle_id][2].x, 45.0, 1.0);
             break;
             case 60:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, GBPUSD[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, GBPUSD[offset+Candle_id][2].y, 60.0, 1.0);
             break;
             case 120:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, GBPUSD[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, GBPUSD[offset+Candle_id][2].z, 120.0, 1.0);
             break;
             case 180:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, GBPUSD[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, GBPUSD[offset+Candle_id][2].w, 180.0, 1.0);
             break;
             case 240:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, GBPUSD[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, GBPUSD[offset+Candle_id][3].x, 240.0, 1.0);
             break;
             case 360:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, GBPUSD[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, GBPUSD[offset+Candle_id][3].y, 360.0, 1.0);
             break;
             case 720:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, GBPUSD[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, GBPUSD[offset+Candle_id][3].z, 720.0, 1.0);
             break;
             case 1440:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, GBPUSD[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, GBPUSD[offset+Candle_id][3].w, 1440.0, 1.0);
             break;
         }
         break;
         case 18:
-        switch (time_interval){
+        switch (time_length){
             case 1:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, USDCAD[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, USDCAD[offset+Candle_id][0].x, 1.0, 1.0);
             break;
             case 2:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, USDCAD[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, USDCAD[offset+Candle_id][0].y, 2.0, 1.0);
             break;
             case 3:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, USDCAD[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, USDCAD[offset+Candle_id][0].z, 3.0, 1.0);
             break;
             case 4:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, USDCAD[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, USDCAD[offset+Candle_id][0].w, 4.0, 1.0);
             break;
             case 5:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, USDCAD[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, USDCAD[offset+Candle_id][1].x, 5.0, 1.0);
             break;
             case 10:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, USDCAD[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, USDCAD[offset+Candle_id][1].y, 10.0, 1.0);
             break;
             case 15:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, USDCAD[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, USDCAD[offset+Candle_id][1].z, 15.0, 1.0);
             break;
             case 30:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, USDCAD[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, USDCAD[offset+Candle_id][1].w, 30.0, 1.0);
             break;
             case 45:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, USDCAD[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, USDCAD[offset+Candle_id][2].x, 45.0, 1.0);
             break;
             case 60:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, USDCAD[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, USDCAD[offset+Candle_id][2].y, 60.0, 1.0);
             break;
             case 120:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, USDCAD[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, USDCAD[offset+Candle_id][2].z, 120.0, 1.0);
             break;
             case 180:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, USDCAD[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, USDCAD[offset+Candle_id][2].w, 180.0, 1.0);
             break;
             case 240:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, USDCAD[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, USDCAD[offset+Candle_id][3].x, 240.0, 1.0);
             break;
             case 360:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, USDCAD[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, USDCAD[offset+Candle_id][3].y, 360.0, 1.0);
             break;
             case 720:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, USDCAD[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, USDCAD[offset+Candle_id][3].z, 720.0, 1.0);
             break;
             case 1440:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, USDCAD[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, USDCAD[offset+Candle_id][3].w, 1440.0, 1.0);
             break;
         }
         break;
         case 19:
-        switch (time_interval){
+        switch (time_length){
             case 1:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, USDCHF[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, USDCHF[offset+Candle_id][0].x, 1.0, 1.0);
             break;
             case 2:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, USDCHF[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, USDCHF[offset+Candle_id][0].y, 2.0, 1.0);
             break;
             case 3:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, USDCHF[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, USDCHF[offset+Candle_id][0].z, 3.0, 1.0);
             break;
             case 4:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, USDCHF[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, USDCHF[offset+Candle_id][0].w, 4.0, 1.0);
             break;
             case 5:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, USDCHF[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, USDCHF[offset+Candle_id][1].x, 5.0, 1.0);
             break;
             case 10:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, USDCHF[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, USDCHF[offset+Candle_id][1].y, 10.0, 1.0);
             break;
             case 15:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, USDCHF[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, USDCHF[offset+Candle_id][1].z, 15.0, 1.0);
             break;
             case 30:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, USDCHF[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, USDCHF[offset+Candle_id][1].w, 30.0, 1.0);
             break;
             case 45:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, USDCHF[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, USDCHF[offset+Candle_id][2].x, 45.0, 1.0);
             break;
             case 60:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, USDCHF[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, USDCHF[offset+Candle_id][2].y, 60.0, 1.0);
             break;
             case 120:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, USDCHF[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, USDCHF[offset+Candle_id][2].z, 120.0, 1.0);
             break;
             case 180:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, USDCHF[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, USDCHF[offset+Candle_id][2].w, 180.0, 1.0);
             break;
             case 240:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, USDCHF[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, USDCHF[offset+Candle_id][3].x, 240.0, 1.0);
             break;
             case 360:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, USDCHF[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, USDCHF[offset+Candle_id][3].y, 360.0, 1.0);
             break;
             case 720:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, USDCHF[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, USDCHF[offset+Candle_id][3].z, 720.0, 1.0);
             break;
             case 1440:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, USDCHF[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, USDCHF[offset+Candle_id][3].w, 1440.0, 1.0);
             break;
         }
         break;
         case 20:
-        switch (time_interval){
+        switch (time_length){
             case 1:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, USDJPY[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, USDJPY[offset+Candle_id][0].x, 1.0, 1.0);
             break;
             case 2:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, USDJPY[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, USDJPY[offset+Candle_id][0].y, 2.0, 1.0);
             break;
             case 3:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, USDJPY[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, USDJPY[offset+Candle_id][0].z, 3.0, 1.0);
             break;
             case 4:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, USDJPY[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, USDJPY[offset+Candle_id][0].w, 4.0, 1.0);
             break;
             case 5:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, USDJPY[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, USDJPY[offset+Candle_id][1].x, 5.0, 1.0);
             break;
             case 10:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, USDJPY[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, USDJPY[offset+Candle_id][1].y, 10.0, 1.0);
             break;
             case 15:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, USDJPY[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, USDJPY[offset+Candle_id][1].z, 15.0, 1.0);
             break;
             case 30:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, USDJPY[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, USDJPY[offset+Candle_id][1].w, 30.0, 1.0);
             break;
             case 45:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, USDJPY[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, USDJPY[offset+Candle_id][2].x, 45.0, 1.0);
             break;
             case 60:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, USDJPY[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, USDJPY[offset+Candle_id][2].y, 60.0, 1.0);
             break;
             case 120:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, USDJPY[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, USDJPY[offset+Candle_id][2].z, 120.0, 1.0);
             break;
             case 180:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, USDJPY[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, USDJPY[offset+Candle_id][2].w, 180.0, 1.0);
             break;
             case 240:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, USDJPY[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, USDJPY[offset+Candle_id][3].x, 240.0, 1.0);
             break;
             case 360:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, USDJPY[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, USDJPY[offset+Candle_id][3].y, 360.0, 1.0);
             break;
             case 720:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, USDJPY[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, USDJPY[offset+Candle_id][3].z, 720.0, 1.0);
             break;
             case 1440:
-            gl_Position = projection*scaling*translation*vec4(Candle_id*10, USDJPY[offset+Candle_id][1].x, 0.0, 1.0);
+            gl_Position = projection*scaling*translation*vec4(Candle_id*10, USDJPY[offset+Candle_id][3].w, 1440.0, 1.0);
             break;
         }
         break;
     }
+    switch (time_length){
+        case 1:
+        V_Color = vec4(0.992157, 0.501961, 0.658824, 1.0);
+        break;
+        case 2:
+        V_Color = vec4(0.991895, 0.522353, 0.632157, 1.0);
+        break;
+        case 3:
+        V_Color = vec4(0.991634, 0.542745, 0.605490, 1.0);
+        break;
+        case 4:
+        V_Color = vec4(0.991373, 0.563137, 0.578824, 1.0);
+        break;
+        case 5:
+        V_Color = vec4(0.991111, 0.583529, 0.552157, 1.0);
+        break;
+        case 10:
+        V_Color = vec4(0.990850, 0.603922, 0.525490, 1.0);
+        break;
+        case 15:
+        V_Color = vec4(0.990588, 0.624314, 0.498824, 1.0);
+        break;
+        case 30:
+        V_Color = vec4(0.990327, 0.644706, 0.472157, 1.0);
+        break;
+        case 45:
+        V_Color = vec4(0.990065, 0.665098, 0.445490, 1.0);
+        break;
+        case 60:
+        V_Color = vec4(0.989804, 0.685490, 0.418824, 1.0);
+        break;
+        case 120:
+        V_Color = vec4(0.989542, 0.705882, 0.392157, 1.0);
+        break;
+        case 180:
+        V_Color = vec4(0.989281, 0.726275, 0.365490, 1.0);
+        break;
+        case 240:
+        V_Color = vec4(0.989020, 0.746667, 0.338824, 1.0);
+        break;
+        case 360:
+        V_Color = vec4(0.988758, 0.767059, 0.312157, 1.0);
+        break;
+        case 720:
+        V_Color = vec4(0.988497, 0.787451, 0.285490, 1.0);
+        break;
+        case 1440:
+        V_Color = vec4(0.988235, 0.807843, 0.258824, 1.0);
+        break;
+    }
 
     
-    V_Color = vec4(0.0, 1.0, 1.0, 1.0);
+
 }

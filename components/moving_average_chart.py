@@ -12,6 +12,7 @@ class MovingAverageChart:
         # private variables
         self.compute_shader = load_program(r".\indicator\shaders\SimpleMovingAverageCompute.bin")
         self.render_shader = load_program(r".\indicator\shaders\SimpleMovingAverageRender.bin")
+        self.length = 1
 
         # gl buffer objects
         self.vao = glGenVertexArrays(1)
@@ -28,19 +29,21 @@ class MovingAverageChart:
         self.cursor_loc = glGetUniformLocation(self.render_shader, "cursor")
         self.offset_loc = glGetUniformLocation(self.render_shader, "offset")
         self.coin_pair_id_loc = glGetUniformLocation(self.render_shader, "coin_pair_id")
-        self.time_interval_loc = glGetUniformLocation(self.render_shader, "time_interval")
+        self.time_length_loc = glGetUniformLocation(self.render_shader, "time_length")
 
         # initialize GPU variables
         self.maintain_buffer(init=True)
         self.maintain_uniform(init=True)
 
     def __call__(self, *args, **kwargs):
+        self.length = args[0]
         glUseProgram(self.render_shader)
         self.maintain_buffer()
         self.maintain_uniform()
 
         # draw call
         glUseProgram(self.render_shader)
+        glUniform1i(self.time_length_loc, self.length)
         glBindVertexArray(self.vao)
         glLineWidth(3)
         glDrawArrays(GL_LINE_STRIP, 0, min(self.status.current-self.status.offset+1, 160))
@@ -117,7 +120,7 @@ class MovingAverageChart:
         else:
             # upgrade data and buffer if is required
 
-            if self.status.data_manager.upgraded:
+            if self.status.data_manager.upgraded and not self.status.data_manager.upgrading:
                 # glBindBuffer(GL_SHADER_STORAGE_BUFFER, self.compute_sbo)
                 # buf = np.zeros((4 * 4 * 100000 * 21,), dtype=np.float32)
                 # glBufferData(GL_SHADER_STORAGE_BUFFER, buf.nbytes, buf, GL_DYNAMIC_DRAW)
@@ -195,7 +198,7 @@ class MovingAverageChart:
             glUniform4fv(self.cursor_loc, 1, pyrr.Vector4(self.status.cursor))
             glUniform1i(self.offset_loc, self.status.offset)
             glUniform1i(self.coin_pair_id_loc, self.status.coin_pair_id)
-            glUniform1i(self.time_interval_loc, self.status.time_interval)
+            glUniform1i(self.time_length_loc, self.length)
         else:
             if self.status.modified:
                 glUseProgram(self.render_shader)
@@ -225,4 +228,4 @@ class MovingAverageChart:
                 glUniform4fv(self.cursor_loc, 1, pyrr.Vector4(self.status.cursor))
                 glUniform1i(self.offset_loc, self.status.offset)
                 glUniform1i(self.coin_pair_id_loc, self.status.coin_pair_id)
-                glUniform1i(self.time_interval_loc, self.status.time_interval)
+                glUniform1i(self.time_length_loc, self.length)

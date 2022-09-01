@@ -75,10 +75,20 @@ class DisplayPort:
             self.status({"current": min([self.data_manager.pairs[_pair_].current[1] for _pair_ in self.coin_pairs]),
                          "anchor": max((0, min([self.data_manager.pairs[_pair_].current[1] for _pair_ in self.coin_pairs])-200))
                          })
-
+            # print(self.data_manager.pairs["AUDCAD"].candles[1][self.status.current-1:self.status.current+1])
+            # print(np.frombuffer(glGetBufferSubData(GL_SHADER_STORAGE_BUFFER, self.status.current*16-16, 32, None), dtype=np.float32).reshape((-1, 4)))
             self.candle_chart()
             self.intensity_chart()
-            self.moving_average_chart()
+            self.moving_average_chart(1)
+            self.moving_average_chart(2)
+            self.moving_average_chart(3)
+            self.moving_average_chart(4)
+            self.moving_average_chart(5)
+            self.moving_average_chart(10)
+            self.moving_average_chart(15)
+            self.moving_average_chart(30)
+            self.moving_average_chart(60)
+            self.moving_average_chart(120)
             renderer.render_text(f"{self.status.coin_pairs[self.status.coin_pair_id]}", 600, 500, 0.5)
 
             self.status.modified = False

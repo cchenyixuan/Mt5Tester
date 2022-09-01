@@ -56,6 +56,7 @@ class DataManager:
         """
         init manager, connect mt5 server and get all ticks
         """
+        self.upgrading = False
         self.upgraded = False
         self.pairs = {
             "AUDCAD": DataClass("AUDCAD", time_from, time_to),
@@ -162,11 +163,13 @@ class DataManager:
             print("Unmatched TimeStamps!")
 
     def c_call(self):
-        time.sleep(1)
+        time.sleep(5)
         while True:
-            time.sleep(1)
+            self.upgrading = True
             self.__call__()
+            self.upgrading = False
             self.upgraded = True
+            time.sleep(5)
 
     def mt5_load_ticks(self, time_from, time_to):
         # establish connection to MetaTrader 5 terminal

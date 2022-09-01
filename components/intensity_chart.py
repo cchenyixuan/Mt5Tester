@@ -115,7 +115,7 @@ class IntensityChart:
         else:
             # upgrade data and buffer if is required
 
-            if self.status.data_manager.upgraded:
+            if self.status.data_manager.upgraded and not self.status.data_manager.upgrading:
                 # glBindBuffer(GL_SHADER_STORAGE_BUFFER, self.compute_sbo)
                 # buf = np.zeros((4 * 4 * 100000 * 7,), dtype=np.float32)
                 # glBufferData(GL_SHADER_STORAGE_BUFFER, buf.nbytes, buf, GL_DYNAMIC_DRAW)
