@@ -96,13 +96,13 @@ class DataClass:
             pointer += (step + 1)
         # upgrade end ptr
         ptr_end = pointer
-        # upgrade current
-        for interval in self.time_intervals:
-            self.current[interval] = (ptr_end-1)//interval
         # buffer data upgraded, refresh candles
         # print(ptr_start, ptr_end)  # debug
         self.max_number = int(self.utc_to_timestamp-self.utc_from_timestamp)//60
         self.upgrade_candle(ptr_start, ptr_end)
+        # upgrade current
+        for interval in self.time_intervals:
+            self.current[interval] = (ptr_end - 1) // interval
 
     def upgrade_candle(self, ptr1, ptr2):
         # Todo: candles have 0 inside

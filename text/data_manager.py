@@ -166,7 +166,9 @@ class DataManager:
         time.sleep(5)
         while True:
             self.upgrading = True
+            print(f"before {min([self.pairs[_pair_].current[1] for _pair_ in self.pairs.keys()])}")
             self.__call__()
+            print(f"after {min([self.pairs[_pair_].current[1] for _pair_ in self.pairs.keys()])}")
             self.upgrading = False
             self.upgraded = True
             time.sleep(5)

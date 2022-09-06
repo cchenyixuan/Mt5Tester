@@ -7,6 +7,7 @@ from utils.shader_program_pre_compiler import load_program
 class MovingAverageChart:
     def __init__(self, status):
         # common status shared between charts
+        self.upgrade = False
         self.status = status
 
         # private variables
@@ -35,8 +36,9 @@ class MovingAverageChart:
         self.maintain_buffer(init=True)
         self.maintain_uniform(init=True)
 
-    def __call__(self, *args, **kwargs):
-        self.length = args[0]
+    def __call__(self, upgrade, length):
+        self.upgrade = upgrade
+        self.length = length
         glUseProgram(self.render_shader)
         self.maintain_buffer()
         self.maintain_uniform()
@@ -120,7 +122,7 @@ class MovingAverageChart:
         else:
             # upgrade data and buffer if is required
 
-            if self.status.data_manager.upgraded and not self.status.data_manager.upgrading:
+            if self.upgrade and not self.status.data_manager.upgrading:
                 # glBindBuffer(GL_SHADER_STORAGE_BUFFER, self.compute_sbo)
                 # buf = np.zeros((4 * 4 * 100000 * 21,), dtype=np.float32)
                 # glBufferData(GL_SHADER_STORAGE_BUFFER, buf.nbytes, buf, GL_DYNAMIC_DRAW)
