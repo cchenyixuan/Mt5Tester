@@ -46,6 +46,27 @@ if __name__ == "__main__":
     window = glfw.create_window(100, 100, "dump", None, None)
     glfw.hide_window(window)
     glfw.make_context_current(window)
+
+    vertex_src = """"""
+    geometry_src = """"""
+    fragment_src = """"""
+    with open(r"C:\Users\ysugi\PycharmProjects\Mt5Tester/indicator/shaders/coordinates_vertex.shader", "r") as f:
+        for row in f:
+            vertex_src += row
+        f.close()
+    with open(r"C:\Users\ysugi\PycharmProjects\Mt5Tester/indicator/shaders/coordinates_geometry.shader", "r") as f:
+        for row in f:
+            geometry_src += row
+        f.close()
+    with open(r"C:\Users\ysugi\PycharmProjects\Mt5Tester/indicator/shaders/coordinates_fragment.shader", "r") as f:
+        for row in f:
+            fragment_src += row
+        f.close()
+    dump_shading_program(
+        ((vertex_src, GL_VERTEX_SHADER), (geometry_src, GL_GEOMETRY_SHADER), (fragment_src, GL_FRAGMENT_SHADER)),
+        export_dir="../indicator/shaders/CoordinatesRender.bin")
+
+
     with open(r"C:\Users\ysugi\PycharmProjects\Mt5Tester\indicator\shaders/Intensity.shader", "r") as f:
         c_src = f.read()
         f.close()

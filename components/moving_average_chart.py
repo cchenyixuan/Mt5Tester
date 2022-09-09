@@ -175,7 +175,7 @@ class MovingAverageChart:
         if init:
             glUseProgram(self.render_shader)
             glUniformMatrix4fv(self.projection_loc, 1, GL_FALSE,
-                               pyrr.matrix44.create_orthogonal_projection_matrix(0, 1920, -500, 800, -1600, 100))
+                               pyrr.matrix44.create_orthogonal_projection_matrix(0, 1920, -800, 800, -1600, 100))
             lower_boundary = np.min(
                 self.status.data_manager.pairs[self.status.coin_pairs[self.status.coin_pair_id]].candles[
                     self.status.time_interval][

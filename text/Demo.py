@@ -44,11 +44,11 @@ if __name__ == "__main__":
 
     vertex_src = """"""
     fragment_src = """"""
-    with open(r"./shaders/demo_vertex.shader", "r") as f:
+    with open(r"../text/shaders/demo_vertex.shader", "r") as f:
         for row in f:
             vertex_src += row
         f.close()
-    with open(r"./shaders/demo_fragment.shader", "r") as f:
+    with open(r"../text/shaders/demo_fragment.shader", "r") as f:
         for row in f:
             fragment_src += row
         f.close()

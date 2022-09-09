@@ -92,6 +92,7 @@ class DisplayPort:
             self.moving_average_chart(data_upgraded, 30)
             self.moving_average_chart(data_upgraded, 60)
             self.moving_average_chart(data_upgraded, 120)
+            self.moving_average_chart(data_upgraded, 180)
             renderer.render_text(f"{self.status.coin_pairs[self.status.coin_pair_id]}", 600, 500, 0.5)
 
             self.status.modified = False
@@ -117,7 +118,7 @@ class DisplayPort:
                 self.click = False
 
         def scroll_clb(*args):
-            self.status({"coin_pair_id": int((self.status.coin_pair_id+args[1]+args[2])%20)})
+            self.status({"coin_pair_id": int((self.status.coin_pair_id+args[1]+args[2])%21)})
 
         glfw.set_scroll_callback(self.window, scroll_clb)
 

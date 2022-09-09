@@ -9,6 +9,7 @@ class IntensityChart:
         # common status shared between charts
         self.upgrade = False
         self.status = status
+        self.length = 4
 
         # private variables
         self.compute_shader = load_program(r".\indicator\shaders\IntensityCompute.bin")
@@ -22,6 +23,7 @@ class IntensityChart:
 
         # shader uniforms
         self.anchor_loc = glGetUniformLocation(self.compute_shader, "anchor")
+        self.length_loc = glGetUniformLocation(self.compute_shader, "length")
 
         self.projection_loc = glGetUniformLocation(self.render_shader, "projection")
         self.scaling_loc = glGetUniformLocation(self.render_shader, "scaling")
@@ -111,6 +113,7 @@ class IntensityChart:
             # upgrade moving-average buffer
             glUseProgram(self.compute_shader)
             glUniform1i(self.anchor_loc, 0)
+            glUniform1i(self.length_loc, self.length)
             glDispatchCompute(self.status.current + 1 - self.status.anchor + 1, 1, 1)
             glMemoryBarrier(GL_SHADER_STORAGE_BARRIER_BIT)
 

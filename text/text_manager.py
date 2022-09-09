@@ -22,18 +22,18 @@ class TextRenderer:
         self.character_dict = {}
         self.vertex_src = """"""
         self.fragment_src = """"""
-        with open(r"text/shaders/text_vertex.shader", "r") as f:
+        with open(r"../text/shaders/text_vertex.shader", "r") as f:
             for row in f:
                 self.vertex_src += row
             f.close()
-        with open(r"text/shaders/text_fragment.shader", "r") as f:
+        with open(r"../text/shaders/text_fragment.shader", "r") as f:
             for row in f:
                 self.fragment_src += row
             f.close()
 
         glPixelStorei(GL_UNPACK_ALIGNMENT, 1)
         for c in range(128):
-            face = freetype.Face(r"text/fonts/comic.ttf")
+            face = freetype.Face(r"../text/fonts/comic.ttf")
             face.set_pixel_sizes(0, 64)
             face.load_char(chr(c))
             texture = glGenTextures(1)
