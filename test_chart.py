@@ -7,7 +7,7 @@ from OpenGL.GL import *
 import glfw
 from OpenGL.GL.shaders import compileProgram, compileShader
 
-from components import chart, candle_chart, intensity_chart, moving_average_chart
+from components import chart, candle_chart, intensity_chart, moving_average_chart, moving_average_convergence_divergence_chart
 from text.text_manager import TextRenderer
 
 
@@ -29,7 +29,7 @@ class DisplayPort:
         from text.data_manager import DataManager
         from datetime import datetime
         tomorrow = datetime.utcfromtimestamp(time.time() + 86400.0*2)
-        month_ago = datetime.utcfromtimestamp(time.time() - 86400.0*10)
+        month_ago = datetime.utcfromtimestamp(time.time() - 86400.0*2)
         self.data_manager = DataManager(
             time_from=(month_ago.year, month_ago.month, month_ago.day),
             time_to=(tomorrow.year, tomorrow.month, tomorrow.day),
@@ -57,6 +57,7 @@ class DisplayPort:
         self.candle_chart = candle_chart.CandleChart(self.status)
         self.intensity_chart = intensity_chart.IntensityChart(self.status)
         self.moving_average_chart = moving_average_chart.MovingAverageChart(self.status)
+        self.moving_average_convergence_divergence_chart = moving_average_convergence_divergence_chart.MovingAverageConvergenceDivergenceChart(self.status)
 
     def __call__(self, *args, **kwargs):
         renderer = TextRenderer(1920, 1400)
@@ -93,6 +94,7 @@ class DisplayPort:
             self.moving_average_chart(data_upgraded, 60)
             self.moving_average_chart(data_upgraded, 120)
             self.moving_average_chart(data_upgraded, 180)
+            self.moving_average_convergence_divergence_chart(data_upgraded, 1)
             renderer.render_text(f"{self.status.coin_pairs[self.status.coin_pair_id]}", 600, 500, 0.5)
 
             self.status.modified = False

@@ -121,4 +121,29 @@ if __name__ == "__main__":
         ((vertex_src, GL_VERTEX_SHADER), (fragment_src, GL_FRAGMENT_SHADER)),
         export_dir="../indicator/shaders/SimpleMovingAverageRender.bin")
 
+    vertex_src = """"""
+    geometry_src = """"""
+    fragment_src = """"""
+    with open(r"C:\Users\ysugi\PycharmProjects\Mt5Tester/indicator/shaders/MovingAverageConvergenceDivergence_vertex.shader", "r") as f:
+        for row in f:
+            vertex_src += row
+        f.close()
+    with open(r"C:\Users\ysugi\PycharmProjects\Mt5Tester/indicator/shaders/MovingAverageConvergenceDivergence_geometry.shader", "r") as f:
+        for row in f:
+            geometry_src += row
+        f.close()
+    with open(r"C:\Users\ysugi\PycharmProjects\Mt5Tester/indicator/shaders/MovingAverageConvergenceDivergence_fragment.shader", "r") as f:
+        for row in f:
+            fragment_src += row
+        f.close()
+    dump_shading_program(
+        ((vertex_src, GL_VERTEX_SHADER), (geometry_src, GL_GEOMETRY_SHADER), (fragment_src, GL_FRAGMENT_SHADER)),
+        export_dir="../indicator/shaders/MovingAverageConvergenceDivergenceRender.bin")
+
+    with open(r"C:\Users\ysugi\PycharmProjects\Mt5Tester\indicator\shaders/MovingAverageConvergenceDivergence.shader", "r") as f:
+        c_src = f.read()
+        f.close()
+    dump_shading_program(((c_src, GL_COMPUTE_SHADER), ),
+                         export_dir="../indicator/shaders/MovingAverageConvergenceDivergenceCompute.bin")
+
     glfw.terminate()

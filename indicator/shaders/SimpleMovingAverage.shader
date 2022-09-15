@@ -508,6 +508,393 @@ float SMA(int case_id, int start, int length){
     return add_up/length;
 }
 
+float EMA(int case_id, int start, int length){
+    // start need to be __ge__ than 2*length-1
+    float add_up;
+    float k;
+    float temp[2000];
+    add_up = 0.0;
+    k = 2.0/(length+1);
+
+    if (case_id == 0){
+        temp[0] = (1-k)*SMA(case_id, start-length, length) + k*AUDCAD_candle_1[start-length+1].w;
+        for(int i=1; i<length; ++i){
+            temp[i] = (1-k)*temp[i-1] + k*AUDCAD_candle_1[start-length+1+i].w;
+        }
+    }
+    if (case_id == 1){
+        temp[0] = (1-k)*SMA(case_id, start-length, length) + k*AUDCHF_candle_1[start-length+1].w;
+        for(int i=1; i<length; ++i){
+            temp[i] = (1-k)*temp[i-1] + k*AUDCHF_candle_1[start-length+1+i].w;
+        }
+    }
+    if (case_id == 2){
+        temp[0] = (1-k)*SMA(case_id, start-length, length) + k*AUDJPY_candle_1[start-length+1].w;
+        for(int i=1; i<length; ++i){
+            temp[i] = (1-k)*temp[i-1] + k*AUDJPY_candle_1[start-length+1+i].w;
+        }
+    }
+    if (case_id == 3){
+        temp[0] = (1-k)*SMA(case_id, start-length, length) + k*AUDUSD_candle_1[start-length+1].w;
+        for(int i=1; i<length; ++i){
+            temp[i] = (1-k)*temp[i-1] + k*AUDUSD_candle_1[start-length+1+i].w;
+        }
+    }
+    if (case_id == 4){
+        temp[0] = (1-k)*SMA(case_id, start-length, length) + k*CADCHF_candle_1[start-length+1].w;
+        for(int i=1; i<length; ++i){
+            temp[i] = (1-k)*temp[i-1] + k*CADCHF_candle_1[start-length+1+i].w;
+        }
+    }
+    if (case_id == 5){
+        temp[0] = (1-k)*SMA(case_id, start-length, length) + k*CADJPY_candle_1[start-length+1].w;
+        for(int i=1; i<length; ++i){
+            temp[i] = (1-k)*temp[i-1] + k*CADJPY_candle_1[start-length+1+i].w;
+        }
+    }
+    if (case_id == 6){
+        temp[0] = (1-k)*SMA(case_id, start-length, length) + k*CHFJPY_candle_1[start-length+1].w;
+        for(int i=1; i<length; ++i){
+            temp[i] = (1-k)*temp[i-1] + k*CHFJPY_candle_1[start-length+1+i].w;
+        }
+    }
+    if (case_id == 7){
+        temp[0] = (1-k)*SMA(case_id, start-length, length) + k*EURAUD_candle_1[start-length+1].w;
+        for(int i=1; i<length; ++i){
+            temp[i] = (1-k)*temp[i-1] + k*EURAUD_candle_1[start-length+1+i].w;
+        }
+    }
+    if (case_id == 8){
+        temp[0] = (1-k)*SMA(case_id, start-length, length) + k*EURCAD_candle_1[start-length+1].w;
+        for(int i=1; i<length; ++i){
+            temp[i] = (1-k)*temp[i-1] + k*EURCAD_candle_1[start-length+1+i].w;
+        }
+    }
+    if (case_id == 9){
+        temp[0] = (1-k)*SMA(case_id, start-length, length) + k*EURCHF_candle_1[start-length+1].w;
+        for(int i=1; i<length; ++i){
+            temp[i] = (1-k)*temp[i-1] + k*EURCHF_candle_1[start-length+1+i].w;
+        }
+    }
+    if (case_id == 10){
+        temp[0] = (1-k)*SMA(case_id, start-length, length) + k*EURGBP_candle_1[start-length+1].w;
+        for(int i=1; i<length; ++i){
+            temp[i] = (1-k)*temp[i-1] + k*EURGBP_candle_1[start-length+1+i].w;
+        }
+    }
+    if (case_id == 11){
+        temp[0] = (1-k)*SMA(case_id, start-length, length) + k*EURJPY_candle_1[start-length+1].w;
+        for(int i=1; i<length; ++i){
+            temp[i] = (1-k)*temp[i-1] + k*EURJPY_candle_1[start-length+1+i].w;
+        }
+    }
+    if (case_id == 12){
+        temp[0] = (1-k)*SMA(case_id, start-length, length) + k*EURUSD_candle_1[start-length+1].w;
+        for(int i=1; i<length; ++i){
+            temp[i] = (1-k)*temp[i-1] + k*EURUSD_candle_1[start-length+1+i].w;
+        }
+    }
+    if (case_id == 13){
+        temp[0] = (1-k)*SMA(case_id, start-length, length) + k*GBPAUD_candle_1[start-length+1].w;
+        for(int i=1; i<length; ++i){
+            temp[i] = (1-k)*temp[i-1] + k*GBPAUD_candle_1[start-length+1+i].w;
+        }
+    }
+    if (case_id == 14){
+        temp[0] = (1-k)*SMA(case_id, start-length, length) + k*GBPCAD_candle_1[start-length+1].w;
+        for(int i=1; i<length; ++i){
+            temp[i] = (1-k)*temp[i-1] + k*GBPCAD_candle_1[start-length+1+i].w;
+        }
+    }
+    if (case_id == 15){
+        temp[0] = (1-k)*SMA(case_id, start-length, length) + k*GBPCHF_candle_1[start-length+1].w;
+        for(int i=1; i<length; ++i){
+            temp[i] = (1-k)*temp[i-1] + k*GBPCHF_candle_1[start-length+1+i].w;
+        }
+    }
+    if (case_id == 16){
+        temp[0] = (1-k)*SMA(case_id, start-length, length) + k*GBPJPY_candle_1[start-length+1].w;
+        for(int i=1; i<length; ++i){
+            temp[i] = (1-k)*temp[i-1] + k*GBPJPY_candle_1[start-length+1+i].w;
+        }
+    }
+    if (case_id == 17){
+        temp[0] = (1-k)*SMA(case_id, start-length, length) + k*GBPUSD_candle_1[start-length+1].w;
+        for(int i=1; i<length; ++i){
+            temp[i] = (1-k)*temp[i-1] + k*GBPUSD_candle_1[start-length+1+i].w;
+        }
+    }
+    if (case_id == 18){
+        temp[0] = (1-k)*SMA(case_id, start-length, length) + k*USDCAD_candle_1[start-length+1].w;
+        for(int i=1; i<length; ++i){
+            temp[i] = (1-k)*temp[i-1] + k*USDCAD_candle_1[start-length+1+i].w;
+        }
+    }
+    if (case_id == 19){
+        temp[0] = (1-k)*SMA(case_id, start-length, length) + k*USDCHF_candle_1[start-length+1].w;
+        for(int i=1; i<length; ++i){
+            temp[i] = (1-k)*temp[i-1] + k*USDCHF_candle_1[start-length+1+i].w;
+        }
+    }
+    if (case_id == 20){
+        temp[0] = (1-k)*SMA(case_id, start-length, length) + k*USDJPY_candle_1[start-length+1].w;
+        for(int i=1; i<length; ++i){
+            temp[i] = (1-k)*temp[i-1] + k*USDJPY_candle_1[start-length+1+i].w;
+        }
+    }
+
+    return temp[length-1];
+}
+
+float WMA(int case_id, int start, int length){
+    //linear weighted moving average
+    float add_up;
+    add_up = 0.0;
+    if (case_id == 0){
+        for(int i=0; i<length; ++i){
+            add_up += AUDCAD_candle_1[start-i].w*(length-i);
+        }
+    }
+    if (case_id == 1){
+        for(int i=0; i<length; ++i){
+            add_up += AUDCHF_candle_1[start-i].w*(length-i);
+        }
+    }
+    if (case_id == 2){
+        for(int i=0; i<length; ++i){
+            add_up += AUDJPY_candle_1[start-i].w*(length-i);
+        }
+    }
+    if (case_id == 3){
+        for(int i=0; i<length; ++i){
+            add_up += AUDUSD_candle_1[start-i].w*(length-i);
+        }
+    }
+    if (case_id == 4){
+        for(int i=0; i<length; ++i){
+            add_up += CADCHF_candle_1[start-i].w*(length-i);
+        }
+    }
+    if (case_id == 5){
+        for(int i=0; i<length; ++i){
+            add_up += CADJPY_candle_1[start-i].w*(length-i);
+        }
+    }
+    if (case_id == 6){
+        for(int i=0; i<length; ++i){
+            add_up += CHFJPY_candle_1[start-i].w*(length-i);
+        }
+    }
+    if (case_id == 7){
+        for(int i=0; i<length; ++i){
+            add_up += EURAUD_candle_1[start-i].w*(length-i);
+        }
+    }
+    if (case_id == 8){
+        for(int i=0; i<length; ++i){
+            add_up += EURCAD_candle_1[start-i].w*(length-i);
+        }
+    }
+    if (case_id == 9){
+        for(int i=0; i<length; ++i){
+            add_up += EURCHF_candle_1[start-i].w*(length-i);
+        }
+    }
+    if (case_id == 10){
+        for(int i=0; i<length; ++i){
+            add_up += EURGBP_candle_1[start-i].w*(length-i);
+        }
+    }
+    if (case_id == 11){
+        for(int i=0; i<length; ++i){
+            add_up += EURJPY_candle_1[start-i].w*(length-i);
+        }
+    }
+    if (case_id == 12){
+        for(int i=0; i<length; ++i){
+            add_up += EURUSD_candle_1[start-i].w*(length-i);
+        }
+    }
+    if (case_id == 13){
+        for(int i=0; i<length; ++i){
+            add_up += GBPAUD_candle_1[start-i].w*(length-i);
+        }
+    }
+    if (case_id == 14){
+        for(int i=0; i<length; ++i){
+            add_up += GBPCAD_candle_1[start-i].w*(length-i);
+        }
+    }
+    if (case_id == 15){
+        for(int i=0; i<length; ++i){
+            add_up += GBPCHF_candle_1[start-i].w*(length-i);
+        }
+    }
+    if (case_id == 16){
+        for(int i=0; i<length; ++i){
+            add_up += GBPJPY_candle_1[start-i].w*(length-i);
+        }
+    }
+    if (case_id == 17){
+        for(int i=0; i<length; ++i){
+            add_up += GBPUSD_candle_1[start-i].w*(length-i);
+        }
+    }
+    if (case_id == 18){
+        for(int i=0; i<length; ++i){
+            add_up += USDCAD_candle_1[start-i].w*(length-i);
+        }
+    }
+    if (case_id == 19){
+        for(int i=0; i<length; ++i){
+            add_up += USDCHF_candle_1[start-i].w*(length-i);
+        }
+    }
+    if (case_id == 20){
+        for(int i=0; i<length; ++i){
+            add_up += USDJPY_candle_1[start-i].w*(length-i);
+        }
+    }
+
+    return add_up/((1+length)*length/2);
+}
+
+float VWMA(int case_id, int start, int length){
+    //linear weighted * varitivity moving average
+    float add_up;
+    float varitivity_add_up;
+    float weight_add_up;
+    float mean;
+    mean = SMA(case_id, start, length);
+    if (case_id == 0){
+        for(int i=0; i<length; ++i){
+            varitivity_add_up += abs(AUDCAD_candle_1[start-i].w-mean)*(length-i);
+            add_up += abs(AUDCAD_candle_1[start-i].w-mean)*(length-i) * AUDCAD_candle_1[start-i].w;
+        }
+    }
+    if (case_id == 1){
+        for(int i=0; i<length; ++i){
+            varitivity_add_up += abs(AUDCHF_candle_1[start-i].w-mean)*(length-i);
+            add_up += abs(AUDCHF_candle_1[start-i].w-mean)*(length-i) * AUDCHF_candle_1[start-i].w;
+        }
+    }
+    if (case_id == 2){
+        for(int i=0; i<length; ++i){
+            varitivity_add_up += abs(AUDJPY_candle_1[start-i].w-mean)*(length-i);
+            add_up += abs(AUDJPY_candle_1[start-i].w-mean)*(length-i) * AUDJPY_candle_1[start-i].w;
+        }
+    }
+    if (case_id == 3){
+        for(int i=0; i<length; ++i){
+            varitivity_add_up += abs(AUDUSD_candle_1[start-i].w-mean)*(length-i);
+            add_up += abs(AUDUSD_candle_1[start-i].w-mean)*(length-i) * AUDUSD_candle_1[start-i].w;
+        }
+    }
+    if (case_id == 4){
+        for(int i=0; i<length; ++i){
+            varitivity_add_up += abs(CADCHF_candle_1[start-i].w-mean)*(length-i);
+            add_up += abs(CADCHF_candle_1[start-i].w-mean)*(length-i) * CADCHF_candle_1[start-i].w;
+        }
+    }
+    if (case_id == 5){
+        for(int i=0; i<length; ++i){
+            varitivity_add_up += abs(CADJPY_candle_1[start-i].w-mean)*(length-i);
+            add_up += abs(CADJPY_candle_1[start-i].w-mean)*(length-i) * CADJPY_candle_1[start-i].w;
+        }
+    }
+    if (case_id == 6){
+        for(int i=0; i<length; ++i){
+            varitivity_add_up += abs(CHFJPY_candle_1[start-i].w-mean)*(length-i);
+            add_up += abs(CHFJPY_candle_1[start-i].w-mean)*(length-i) * CHFJPY_candle_1[start-i].w;
+        }
+    }
+    if (case_id == 7){
+        for(int i=0; i<length; ++i){
+            varitivity_add_up += abs(EURAUD_candle_1[start-i].w-mean)*(length-i);
+            add_up += abs(EURAUD_candle_1[start-i].w-mean)*(length-i) * EURAUD_candle_1[start-i].w;
+        }
+    }
+    if (case_id == 8){
+        for(int i=0; i<length; ++i){
+            varitivity_add_up += abs(EURCAD_candle_1[start-i].w-mean)*(length-i);
+            add_up += abs(EURCAD_candle_1[start-i].w-mean)*(length-i) * EURCAD_candle_1[start-i].w;
+        }
+    }
+    if (case_id == 9){
+        for(int i=0; i<length; ++i){
+            varitivity_add_up += abs(EURCHF_candle_1[start-i].w-mean)*(length-i);
+            add_up += abs(EURCHF_candle_1[start-i].w-mean)*(length-i) * EURCHF_candle_1[start-i].w;
+        }
+    }
+    if (case_id == 10){
+        for(int i=0; i<length; ++i){
+            varitivity_add_up += abs(EURGBP_candle_1[start-i].w-mean)*(length-i);
+            add_up += abs(EURGBP_candle_1[start-i].w-mean)*(length-i) * EURGBP_candle_1[start-i].w;
+        }
+    }
+    if (case_id == 11){
+        for(int i=0; i<length; ++i){
+            varitivity_add_up += abs(EURJPY_candle_1[start-i].w-mean)*(length-i);
+            add_up += abs(EURJPY_candle_1[start-i].w-mean)*(length-i) * EURJPY_candle_1[start-i].w;
+        }
+    }
+    if (case_id == 12){
+        for(int i=0; i<length; ++i){
+            varitivity_add_up += abs(EURUSD_candle_1[start-i].w-mean)*(length-i);
+            add_up += abs(EURUSD_candle_1[start-i].w-mean)*(length-i) * EURUSD_candle_1[start-i].w;
+        }
+    }
+    if (case_id == 13){
+        for(int i=0; i<length; ++i){
+            varitivity_add_up += abs(GBPAUD_candle_1[start-i].w-mean)*(length-i);
+            add_up += abs(GBPAUD_candle_1[start-i].w-mean)*(length-i) * GBPAUD_candle_1[start-i].w;
+        }
+    }
+    if (case_id == 14){
+        for(int i=0; i<length; ++i){
+            varitivity_add_up += abs(GBPCAD_candle_1[start-i].w-mean)*(length-i);
+            add_up += abs(GBPCAD_candle_1[start-i].w-mean)*(length-i) * GBPCAD_candle_1[start-i].w;
+        }
+    }
+    if (case_id == 15){
+        for(int i=0; i<length; ++i){
+            varitivity_add_up += abs(GBPCHF_candle_1[start-i].w-mean)*(length-i);
+            add_up += abs(GBPCHF_candle_1[start-i].w-mean)*(length-i) * GBPCHF_candle_1[start-i].w;
+        }
+    }
+    if (case_id == 16){
+        for(int i=0; i<length; ++i){
+            varitivity_add_up += abs(GBPJPY_candle_1[start-i].w-mean)*(length-i);
+            add_up += abs(GBPJPY_candle_1[start-i].w-mean)*(length-i) * GBPJPY_candle_1[start-i].w;
+        }
+    }
+    if (case_id == 17){
+        for(int i=0; i<length; ++i){
+            varitivity_add_up += abs(GBPUSD_candle_1[start-i].w-mean)*(length-i);
+            add_up += abs(GBPUSD_candle_1[start-i].w-mean)*(length-i) * GBPUSD_candle_1[start-i].w;
+        }
+    }
+    if (case_id == 18){
+        for(int i=0; i<length; ++i){
+            varitivity_add_up += abs(USDCAD_candle_1[start-i].w-mean)*(length-i);
+            add_up += abs(USDCAD_candle_1[start-i].w-mean)*(length-i) * USDCAD_candle_1[start-i].w;
+        }
+    }
+    if (case_id == 19){
+        for(int i=0; i<length; ++i){
+            varitivity_add_up += abs(USDCHF_candle_1[start-i].w-mean)*(length-i);
+            add_up += abs(USDCHF_candle_1[start-i].w-mean)*(length-i) * USDCHF_candle_1[start-i].w;
+        }
+    }
+    if (case_id == 20){
+        for(int i=0; i<length; ++i){
+            varitivity_add_up += abs(USDJPY_candle_1[start-i].w-mean)*(length-i);
+            add_up += abs(USDJPY_candle_1[start-i].w-mean)*(length-i) * USDJPY_candle_1[start-i].w;
+        }
+    }
+    return add_up/varitivity_add_up;
+}
+
 void simple_moving_average(int start){
     int m1;
     int m2;
