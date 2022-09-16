@@ -2,13 +2,14 @@ import pyrr
 import numpy as np
 from OpenGL.GL import *
 from utils.shader_program_pre_compiler import load_program
+from components.chart import Chart
 
 
-class MovingAverageChart:
-    def __init__(self, status):
+class MovingAverageChart(Chart):
+    def __init__(self, status, geometry: dict):
         # common status shared between charts
+        super().__init__(status, geometry)
         self.upgrade = False
-        self.status = status
 
         # private variables
         self.compute_shader = load_program(r".\indicator\shaders\SimpleMovingAverageCompute.bin")
@@ -174,8 +175,7 @@ class MovingAverageChart:
     def maintain_uniform(self, init=False):
         if init:
             glUseProgram(self.render_shader)
-            glUniformMatrix4fv(self.projection_loc, 1, GL_FALSE,
-                               pyrr.matrix44.create_orthogonal_projection_matrix(0, 1920, -800, 800, -1600, 100))
+            glUniformMatrix4fv(self.projection_loc, 1, GL_FALSE, self.projection)
             lower_boundary = np.min(
                 self.status.data_manager.pairs[self.status.coin_pairs[self.status.coin_pair_id]].candles[
                     self.status.time_interval][
@@ -184,7 +184,7 @@ class MovingAverageChart:
                 self.status.data_manager.pairs[self.status.coin_pairs[self.status.coin_pair_id]].candles[
                     self.status.time_interval][
                 self.status.offset: self.status.offset + min(self.status.current - self.status.offset + 1, 160), 1:])
-            scale_factor = 800 / (upper_boundary - lower_boundary + 1e-8)  # avoid ZeroDivisionError
+            scale_factor = self.geometry["height"] / (upper_boundary - lower_boundary + 1e-8)  # avoid ZeroDivisionError
             glUniformMatrix4fv(
                 self.scaling_loc,
                 1,
@@ -214,7 +214,7 @@ class MovingAverageChart:
                         self.status.time_interval][
                     self.status.offset: self.status.offset + min(self.status.current - self.status.offset + 1, 160),
                     1:])
-                scale_factor = 800 / (upper_boundary - lower_boundary + 1e-8)  # avoid ZeroDivisionError
+                scale_factor = self.geometry["height"] / (upper_boundary - lower_boundary + 1e-8)  # avoid ZeroDivisionError
                 glUniformMatrix4fv(
                     self.scaling_loc,
                     1,

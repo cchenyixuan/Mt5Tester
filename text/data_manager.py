@@ -171,7 +171,7 @@ class DataManager:
             print(f"after {min([self.pairs[_pair_].current[1] for _pair_ in self.pairs.keys()])}")
             self.upgrading = False
             self.upgraded = True
-            time.sleep(5)
+            time.sleep(1)
 
     def mt5_load_ticks(self, time_from, time_to):
         # establish connection to MetaTrader 5 terminal

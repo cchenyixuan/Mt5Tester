@@ -2,13 +2,14 @@ import pyrr
 import numpy as np
 from OpenGL.GL import *
 from utils.shader_program_pre_compiler import load_program
+from components.chart import Chart
 
 
-class IntensityChart:
-    def __init__(self, status):
+class IntensityChart(Chart):
+    def __init__(self, status, geometry: dict):
         # common status shared between charts
+        super().__init__(status, geometry)
         self.upgrade = False
-        self.status = status
         self.length = 4
 
         # private variables
@@ -172,10 +173,9 @@ class IntensityChart:
     def maintain_uniform(self, init=False):
         if init:
             glUseProgram(self.render_shader)
-            glUniformMatrix4fv(self.projection_loc, 1, GL_FALSE,
-                               pyrr.matrix44.create_orthogonal_projection_matrix(0, 1920, -360, 1000, -1600, 100))
+            glUniformMatrix4fv(self.projection_loc, 1, GL_FALSE, self.projection)
             glUniformMatrix4fv(self.scaling_loc, 1, GL_FALSE,
-                               pyrr.matrix44.create_from_scale(np.array((1.0, 1.0, 1.0), dtype=np.float32)))
+                               pyrr.matrix44.create_from_scale(np.array((1.0, 0.5, 1.0), dtype=np.float32)))
             glUniformMatrix4fv(self.translation_loc, 1, GL_FALSE,
                                pyrr.matrix44.create_from_translation(np.array((0.0, 0.0, 0.0), dtype=np.float32)))
             glUniform4fv(self.cursor_loc, 1, pyrr.Vector4(self.status.cursor))
